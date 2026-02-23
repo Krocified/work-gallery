@@ -1,0 +1,199 @@
+.work {
+    padding: var(--space-xl) 2.5rem;
+    background: var(--c-bg);
+}
+
+.workHeader {
+    max-width: 1280px;
+    margin: 0 auto 4rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.workTitle {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+}
+
+.workTitle em {
+    font-style: italic;
+    color: var(--c-accent);
+}
+
+.workSubtitle {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+    max-width: 22ch;
+    text-align: right;
+    line-height: 1.8;
+}
+
+/* Grid */
+.workGrid {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+}
+
+/* Card */
+.workCard {
+    position: relative;
+    overflow: hidden;
+    background: var(--c-surface);
+    cursor: pointer;
+}
+
+.workCard:nth-child(1) {
+    grid-column: span 7;
+}
+
+.workCard:nth-child(2) {
+    grid-column: span 5;
+}
+
+.workCard:nth-child(3) {
+    grid-column: span 4;
+}
+
+.workCard:nth-child(4) {
+    grid-column: span 5;
+}
+
+.workCard:nth-child(5) {
+    grid-column: span 3;
+}
+
+.workCard:nth-child(6) {
+    grid-column: span 8;
+}
+
+.workCard:nth-child(7) {
+    grid-column: span 4;
+}
+
+.workMedia {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    transform: scale(1);
+    transition: transform 0.7s var(--ease-smooth);
+}
+
+.workCard:nth-child(1) .workMedia,
+.workCard:nth-child(6) .workMedia {
+    aspect-ratio: 16/9;
+}
+
+.workCard:nth-child(3) .workMedia,
+.workCard:nth-child(5) .workMedia {
+    aspect-ratio: 3/4;
+}
+
+.workOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(46, 40, 34, 0.85) 0%, rgba(46, 40, 34, 0.0) 40%);
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-smooth);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.75rem;
+}
+
+.workCard:hover .workOverlay {
+    opacity: 1;
+}
+
+.workCard:hover .workMedia {
+    transform: scale(1.04);
+}
+
+.workOverlayCategory {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--c-accent);
+    margin-bottom: 0.4rem;
+}
+
+.workOverlayTitle {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #F7F3EC;
+    line-height: 1.2;
+}
+
+.workOverlayArrow {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(247, 243, 236, 0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #F7F3EC;
+    font-size: 0.85rem;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.workCard:hover .workOverlayArrow {
+    background: var(--c-accent);
+    border-color: var(--c-accent);
+}
+
+@media (max-width: 1024px) {
+    .workCard:nth-child(n) {
+        grid-column: span 6;
+    }
+
+    .workCard:nth-child(1) {
+        grid-column: span 12;
+    }
+
+    .workCard:nth-child(6) {
+        grid-column: span 12;
+    }
+}
+
+@media (max-width: 768px) {
+    .work {
+        padding: var(--space-lg) 1.25rem;
+    }
+
+    .workHeader {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .workSubtitle {
+        text-align: left;
+    }
+
+    .workGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .workCard:nth-child(n) {
+        grid-column: span 1;
+    }
+
+    .workMedia {
+        aspect-ratio: 4/3 !important;
+    }
+}
