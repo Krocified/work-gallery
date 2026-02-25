@@ -22,7 +22,7 @@ export const featuredWorks: Project[] = [
         title: 'Luxury Watch Ad',
         category: 'featured',
         type: 'image',
-        url: 'https://images.unsplash.com/photo-1547996160-81dfa63595dd?q=80&w=1974&auto=format&fit=crop',
+        url: 's3://work-gallery/featured/watch-ad.jpg',
         aspectRatio: 'portrait',
     },
     {
@@ -30,7 +30,7 @@ export const featuredWorks: Project[] = [
         title: 'Modern Interior Design',
         category: 'featured',
         type: 'image',
-        url: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop',
+        url: 's3://work-gallery/featured/interior.jpg',
         aspectRatio: 'landscape',
     },
     {
@@ -38,7 +38,7 @@ export const featuredWorks: Project[] = [
         title: 'Cosmetic Branding',
         category: 'featured',
         type: 'image',
-        url: 'https://images.unsplash.com/photo-1596462502278-27bfaf41099b?q=80&w=2080&auto=format&fit=crop',
+        url: 's3://work-gallery/featured/cosmetic.jpg',
         aspectRatio: 'square',
     },
     {
@@ -46,7 +46,7 @@ export const featuredWorks: Project[] = [
         title: 'Minimalist Poster',
         category: 'featured',
         type: 'image',
-        url: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1964&auto=format&fit=crop',
+        url: 's3://work-gallery/featured/poster.jpg',
         aspectRatio: 'portrait',
     },
     {
@@ -54,7 +54,7 @@ export const featuredWorks: Project[] = [
         title: 'Urban Architecture',
         category: 'featured',
         type: 'image',
-        url: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop',
+        url: 's3://work-gallery/featured/architecture.jpg',
         aspectRatio: 'landscape',
     },
     {
@@ -62,7 +62,7 @@ export const featuredWorks: Project[] = [
         title: 'Abstract Concept',
         category: 'featured',
         type: 'image',
-        url: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2070&auto=format&fit=crop',
+        url: 's3://work-gallery/featured/abstract.jpg',
         aspectRatio: 'portrait',
     },
 ];
@@ -73,28 +73,28 @@ export const allCategories: Category[] = [
         name: 'Social Media Feed',
         description: 'High-engagement social layouts and creative feeds.',
         brands: ['Nike', 'Coca Cola', 'Apple'],
-        coverImage: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1974&auto=format&fit=crop'
+        coverImage: 's3://work-gallery/categories/social-media.jpg'
     },
     {
         id: 'banners',
         name: 'Banners',
         description: 'Impactful digital and print banner designs.',
         brands: ['Samsung', 'Spotify'],
-        coverImage: 'https://images.unsplash.com/photo-1542744094-24638eff58bb?q=80&w=2071&auto=format&fit=crop'
+        coverImage: 's3://work-gallery/categories/banners.jpg'
     },
     {
         id: 'reels',
         name: 'Reels Video',
         description: 'Dynamic short-form video content.',
         brands: ['Red Bull', 'GoPro'],
-        coverImage: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2071&auto=format&fit=crop'
+        coverImage: 's3://work-gallery/categories/reels.jpg'
     },
     {
         id: 'motion-graphics',
         name: 'Motion Graphics',
         description: 'Fluid animations and motion storytelling.',
         brands: ['Netflix', 'Airbnb'],
-        coverImage: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop'
+        coverImage: 's3://work-gallery/categories/motion-graphics.jpg'
     },
 ];
 
@@ -106,7 +106,7 @@ export const projectsByBrand: Record<string, Project[]> = {
             brand: 'Nike',
             category: 'social-media',
             type: 'image',
-            url: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop',
+            url: 's3://work-gallery/brands/nike/feed.jpg',
             aspectRatio: 'square',
         },
         {
@@ -115,7 +115,7 @@ export const projectsByBrand: Record<string, Project[]> = {
             brand: 'Nike',
             category: 'social-media',
             type: 'image',
-            url: 'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=1925&auto=format&fit=crop',
+            url: 's3://work-gallery/brands/nike/air-max.jpg',
             aspectRatio: 'square',
         },
         {
@@ -124,7 +124,7 @@ export const projectsByBrand: Record<string, Project[]> = {
             brand: 'Nike',
             category: 'social-media',
             type: 'image',
-            url: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=2012&auto=format&fit=crop',
+            url: 's3://work-gallery/brands/nike/run-club.jpg',
             aspectRatio: 'portrait',
         },
         {
@@ -133,7 +133,7 @@ export const projectsByBrand: Record<string, Project[]> = {
             brand: 'Nike',
             category: 'social-media',
             type: 'image',
-            url: 'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=2070&auto=format&fit=crop',
+            url: 's3://work-gallery/brands/nike/athletes.jpg',
             aspectRatio: 'landscape',
         },
     ],
@@ -144,7 +144,7 @@ export const projectsByBrand: Record<string, Project[]> = {
             brand: 'Coca Cola',
             category: 'social-media',
             type: 'image',
-            url: 'https://images.unsplash.com/photo-1554866585-cd94860890b7?q=80&w=1965&auto=format&fit=crop',
+            url: 's3://work-gallery/brands/coca-cola/summer.jpg',
             aspectRatio: 'square',
         },
         {
@@ -153,7 +153,7 @@ export const projectsByBrand: Record<string, Project[]> = {
             brand: 'Coca Cola',
             category: 'social-media',
             type: 'image',
-            url: 'https://images.unsplash.com/photo-1574510167683-10e6a8d3886f?q=80&w=2070&auto=format&fit=crop',
+            url: 's3://work-gallery/brands/coca-cola/classic.jpg',
             aspectRatio: 'landscape',
         },
     ],
@@ -164,12 +164,10 @@ export const projectsByBrand: Record<string, Project[]> = {
             brand: 'Apple',
             category: 'social-media',
             type: 'image',
-            url: 'https://images.unsplash.com/photo-1510557880182-3d4d3cba3f21?q=80&w=2070&auto=format&fit=crop',
+            url: 's3://work-gallery/brands/apple/iphone-16.jpg',
             aspectRatio: 'portrait',
         },
     ],
-    'Samsung': [],
-    'Spotify': [],
     'Red Bull': [
         {
             id: 'rb1',
@@ -177,7 +175,7 @@ export const projectsByBrand: Record<string, Project[]> = {
             brand: 'Red Bull',
             category: 'reels',
             type: 'image',
-            url: 'https://images.unsplash.com/photo-1533107862482-0e6974b06bec?q=80&w=2070&auto=format&fit=crop',
+            url: 's3://work-gallery/brands/red-bull/motivation.jpg',
             aspectRatio: 'portrait',
         },
     ],
@@ -188,10 +186,12 @@ export const projectsByBrand: Record<string, Project[]> = {
             brand: 'GoPro',
             category: 'reels',
             type: 'image',
-            url: 'https://images.unsplash.com/photo-1502759683299-cdcd6974244f?q=80&w=2070&auto=format&fit=crop',
+            url: 's3://work-gallery/brands/gopro/adventure.jpg',
             aspectRatio: 'landscape',
         },
     ],
+    'Samsung': [],
+    'Spotify': [],
     'Netflix': [],
     'Airbnb': [],
 };

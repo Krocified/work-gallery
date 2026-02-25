@@ -1,7 +1,41 @@
 import Masonry from 'react-masonry-css';
 import { motion } from 'framer-motion';
 import { featuredWorks } from '../../data/projects';
+import type { Project } from '../../data/projects';
+import { useAssetUrl } from '../../hooks/useAssetUrl';
 import styles from './FeaturedWorks.module.css';
+
+const FeaturedItem = ({ project, index }: { project: Project, index: number }) => {
+    const { url: assetUrl } = useAssetUrl(project.url);
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: (index % 2) * 0.1 }}
+            className={styles.item}
+        >
+            <div className={styles.mediaContainer}>
+                {project.type === 'video' ? (
+                    <video
+                        src={assetUrl}
+                        className={styles.image}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                    />
+                ) : (
+                    <img src={assetUrl} alt={project.title} className={styles.image} />
+                )}
+                <div className={styles.overlay}>
+                    <h3 className="serif">{project.title}</h3>
+                </div>
+            </div>
+        </motion.div>
+    );
+};
 
 const FeaturedWorks = () => {
     const breakpointColumnsObj = {
@@ -29,32 +63,7 @@ const FeaturedWorks = () => {
                     columnClassName="my-masonry-grid_column"
                 >
                     {featuredWorks.map((project, index) => (
-                        <motion.div
-                            key={project.id}
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: (index % 2) * 0.1 }}
-                            className={styles.item}
-                        >
-                            <div className={styles.mediaContainer}>
-                                {project.type === 'video' ? (
-                                    <video
-                                        src={project.url}
-                                        className={styles.image}
-                                        autoPlay
-                                        muted
-                                        loop
-                                        playsInline
-                                    />
-                                ) : (
-                                    <img src={project.url} alt={project.title} className={styles.image} />
-                                )}
-                                <div className={styles.overlay}>
-                                    <h3 className="serif">{project.title}</h3>
-                                </div>
-                            </div>
-                        </motion.div>
+                        <FeaturedItem key={project.id} project={project} index={index} />
                     ))}
                 </Masonry>
             </div>

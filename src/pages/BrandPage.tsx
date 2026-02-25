@@ -1,10 +1,41 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { projectsByBrand } from '../data/projects';
+import type { Project } from '../data/projects';
+import { useAssetUrl } from '../hooks/useAssetUrl';
 import styles from './Pages.module.css';
 
+const GalleryItem = ({ project, index }: { project: Project, index: number }) => {
+    const { url: assetUrl } = useAssetUrl(project.url);
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: index * 0.1 }}
+            className={styles.galleryItem}
+        >
+            {project.type === 'video' ? (
+                <video
+                    src={assetUrl}
+                    className={styles.galleryImg}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                />
+            ) : (
+                <img src={assetUrl} alt={project.title} className={styles.galleryImg} />
+            )}
+            <div className={styles.galleryInfo}>
+                <p className="sans">{project.title}</p>
+            </div>
+        </motion.div>
+    );
+};
+
 const BrandPage = () => {
-    const { categoryId, brandId } = useParams();
+    const { brandId } = useParams();
     const navigate = useNavigate();
 
     const projects = projectsByBrand[brandId || ''] || [];
@@ -17,7 +48,7 @@ const BrandPage = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className={styles.header}
                 >
-                    <button onClick={() => navigate(`/category/${categoryId}`)} className={styles.backBtn}>← Back to brands</button>
+                    <button onClick={() => navigate('/#categories')} className={styles.backBtn}>← Back</button>
                     <h1 className="serif">{brandId}</h1>
                     <p className="sans">Gallery showcase</p>
                 </motion.div>
@@ -25,29 +56,7 @@ const BrandPage = () => {
                 {projects.length > 0 ? (
                     <div className={styles.galleryGrid}>
                         {projects.map((project, index) => (
-                            <motion.div
-                                key={project.id}
-                                initial={{ opacity: 0, scale: 0.98 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: index * 0.1 }}
-                                className={styles.galleryItem}
-                            >
-                                {project.type === 'video' ? (
-                                    <video
-                                        src={project.url}
-                                        className={styles.galleryImg}
-                                        autoPlay
-                                        muted
-                                        loop
-                                        playsInline
-                                    />
-                                ) : (
-                                    <img src={project.url} alt={project.title} className={styles.galleryImg} />
-                                )}
-                                <div className={styles.galleryInfo}>
-                                    <p className="sans">{project.title}</p>
-                                </div>
-                            </motion.div>
+                            <GalleryItem key={project.id} project={project} index={index} />
                         ))}
                     </div>
                 ) : (
