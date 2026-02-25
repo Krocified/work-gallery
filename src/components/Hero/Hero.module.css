@@ -1,0 +1,39 @@
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.content {
+    max-width: 800px;
+}
+
+.title {
+    font-size: clamp(3rem, 10vw, 6rem);
+    line-height: 1;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    max-width: 500px;
+}
+
+.italic {
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 3.5rem;
+    }
+}

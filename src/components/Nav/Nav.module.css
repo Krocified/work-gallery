@@ -1,0 +1,83 @@
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1.5rem 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scrolled {
+    padding: 1rem 0;
+    background: rgba(245, 245, 220, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.desktopLinks {
+    display: flex;
+    gap: 3rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.desktopLinks a {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 400;
+}
+
+.mobileToggle {
+    display: none;
+    color: var(--text-primary);
+}
+
+.mobileMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--bg-color);
+    padding: 2rem;
+    border-bottom: 1px solid var(--bg-accent);
+}
+
+.mobileMenu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+.mobileMenu a {
+    font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+    .desktopLinks {
+        display: none;
+    }
+
+    .mobileToggle {
+        display: block;
+    }
+}
