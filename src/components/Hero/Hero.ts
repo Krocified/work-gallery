@@ -1,19 +1,19 @@
 import styles from './Hero.module.css';
 
 export function createHero(): HTMLElement {
-    const section = document.createElement('section');
-    section.className = styles.hero;
-    section.id = 'hero';
-    section.setAttribute('aria-label', 'Hero');
+  const section = document.createElement('section');
+  section.className = styles.hero;
+  section.id = 'hero';
+  section.setAttribute('aria-label', 'Hero');
 
-    section.innerHTML = `
+  section.innerHTML = `
     <div class="${styles.heroBg}" aria-hidden="true"></div>
 
     <div class="${styles.heroInner}">
       <p class="${styles.heroEyebrow} hero-eyebrow">Creative Portfolio</p>
 
       <h1 class="${styles.heroName} hero-name">
-        Your<br><em>Name Here</em>
+        Amelia<br><em>Callista</em>
       </h1>
 
       <p class="${styles.heroTagline} hero-tagline">
@@ -28,5 +28,5 @@ export function createHero(): HTMLElement {
     </div>
   `;
 
-    return section;
+  return section;
 }

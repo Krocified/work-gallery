@@ -38,12 +38,21 @@ export function initAnimations(): void {
         });
     });
 
-    // ── Work cards staggered reveal ──────────────────────────────
-    const workGrid = document.querySelector('.work-grid');
-    if (workGrid) {
-        gsap.from(workGrid.querySelectorAll('.work-card'), {
-            scrollTrigger: { trigger: workGrid, start: 'top 82%', toggleActions: 'play none none none' },
-            opacity: 0, y: 48, stagger: 0.1, duration: 0.8, ease: 'power3.out',
+    // ── Featured works grid ────────────────────────────────────
+    const featuredCards = document.querySelectorAll<Element>('[class*="card"]');
+    if (featuredCards.length > 0) {
+        gsap.from(Array.from(featuredCards).slice(0, 6), {
+            scrollTrigger: { trigger: featuredCards[0].closest('section'), start: 'top 82%', toggleActions: 'play none none none' },
+            opacity: 0, y: 40, stagger: 0.08, duration: 0.75, ease: 'power3.out',
+        });
+    }
+
+    // ── Categories cards ─────────────────────────────────────────
+    const categoryCards = document.querySelectorAll<Element>('[class*="categories"] [class*="card"]');
+    if (categoryCards.length > 0) {
+        gsap.from(Array.from(categoryCards), {
+            scrollTrigger: { trigger: categoryCards[0].closest('section'), start: 'top 82%', toggleActions: 'play none none none' },
+            opacity: 0, y: 30, stagger: 0.12, duration: 0.7, ease: 'power3.out',
         });
     }
 
