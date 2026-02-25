@@ -12,7 +12,7 @@ const Hero: React.FC = () => {
                     className={styles.content}
                 >
                     <h1 className={styles.title}>
-                        Curating <span className="serif italic">Digital</span> Experiences
+                        Amelia <span className="serif italic">Callista</span>
                     </h1>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -20,7 +20,7 @@ const Hero: React.FC = () => {
                         transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                         className={`${styles.subtitle} sans`}
                     >
-                        A collection of minimalist designs and thoughtful interactions.
+                        Professional Graphic Designer. Nice to meet you!
                     </motion.p>
                 </motion.div>
             </div>

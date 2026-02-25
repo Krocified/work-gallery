@@ -3,10 +3,11 @@ import { motion } from 'framer-motion';
 import { projectsByBrand } from '../data/projects';
 import type { Project } from '../data/projects';
 import { useAssetUrl } from '../hooks/useAssetUrl';
+import Skeleton from '../components/Skeleton/Skeleton';
 import styles from './Pages.module.css';
 
 const GalleryItem = ({ project, index }: { project: Project, index: number }) => {
-    const { url: assetUrl } = useAssetUrl(project.url);
+    const { url: assetUrl, loading } = useAssetUrl(project.url);
 
     return (
         <motion.div
@@ -15,7 +16,9 @@ const GalleryItem = ({ project, index }: { project: Project, index: number }) =>
             transition={{ delay: index * 0.1 }}
             className={styles.galleryItem}
         >
-            {project.type === 'video' ? (
+            {loading ? (
+                <Skeleton aspectRatio={project.aspectRatio} />
+            ) : project.type === 'video' ? (
                 <video
                     src={assetUrl}
                     className={styles.galleryImg}
@@ -27,9 +30,11 @@ const GalleryItem = ({ project, index }: { project: Project, index: number }) =>
             ) : (
                 <img src={assetUrl} alt={project.title} className={styles.galleryImg} />
             )}
-            <div className={styles.galleryInfo}>
-                <p className="sans">{project.title}</p>
-            </div>
+            {!loading && (
+                <div className={styles.galleryInfo}>
+                    <p className="sans">{project.title}</p>
+                </div>
+            )}
         </motion.div>
     );
 };

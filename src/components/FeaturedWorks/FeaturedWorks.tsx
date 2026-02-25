@@ -3,10 +3,11 @@ import { motion } from 'framer-motion';
 import { featuredWorks } from '../../data/projects';
 import type { Project } from '../../data/projects';
 import { useAssetUrl } from '../../hooks/useAssetUrl';
+import Skeleton from '../Skeleton/Skeleton';
 import styles from './FeaturedWorks.module.css';
 
 const FeaturedItem = ({ project, index }: { project: Project, index: number }) => {
-    const { url: assetUrl } = useAssetUrl(project.url);
+    const { url: assetUrl, loading } = useAssetUrl(project.url);
 
     return (
         <motion.div
@@ -17,7 +18,9 @@ const FeaturedItem = ({ project, index }: { project: Project, index: number }) =
             className={styles.item}
         >
             <div className={styles.mediaContainer}>
-                {project.type === 'video' ? (
+                {loading ? (
+                    <Skeleton aspectRatio={project.aspectRatio} />
+                ) : project.type === 'video' ? (
                     <video
                         src={assetUrl}
                         className={styles.image}
@@ -29,9 +32,11 @@ const FeaturedItem = ({ project, index }: { project: Project, index: number }) =
                 ) : (
                     <img src={assetUrl} alt={project.title} className={styles.image} />
                 )}
-                <div className={styles.overlay}>
-                    <h3 className="serif">{project.title}</h3>
-                </div>
+                {!loading && (
+                    <div className={styles.overlay}>
+                        <h3 className="serif">{project.title}</h3>
+                    </div>
+                )}
             </div>
         </motion.div>
     );

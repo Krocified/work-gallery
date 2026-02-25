@@ -11,11 +11,11 @@ const Contact: React.FC = () => {
                 </p>
 
                 <div className={styles.links}>
-                    <a href="mailto:hello@example.com" className={styles.contactLink}>
+                    <a href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL}`} className={styles.contactLink}>
                         <Mail size={20} />
                         <span className="sans">Email Me</span>
                     </a>
-                    <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
+                    <a href={`https://wa.me/${import.meta.env.VITE_CONTACT_PHONE}`} target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
                         <MessageCircle size={20} />
                         <span className="sans">WhatsApp</span>
                     </a>

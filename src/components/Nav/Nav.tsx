@@ -28,7 +28,7 @@ const Nav = () => {
         <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
             <div className={styles.container}>
                 <div className={styles.logo}>
-                    <Link to="/" className="serif">Archive.</Link>
+                    <Link to="/" className="serif">æ Archive</Link>
                 </div>
 
                 {/* Desktop Links */}
