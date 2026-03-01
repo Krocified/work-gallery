@@ -48,7 +48,9 @@ function App() {
         </main>
         <footer style={{ padding: '4rem 2rem', textAlign: 'center', opacity: 0.5, fontSize: '0.8rem' }} className="sans">
           <p>© {new Date().getFullYear()} Archive. All rights reserved.</p>
-          <p style={{ marginTop: '0.5rem' }}>Designed with intention.</p>
+          <p style={{ marginTop: '0.5rem' }}>
+            Collaboration with <a href="https://github.com/Krocified" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', opacity: 1 }}>Michael Jong</a>
+          </p>
         </footer>
       </div>
     </Router>

@@ -2,6 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { projectsByBrand } from '../data/projects';
 import type { Project } from '../data/projects';
+import { brandMapping } from '../data/brandMapping';
 import { useAssetUrl } from '../hooks/useAssetUrl';
 import Skeleton from '../components/Skeleton/Skeleton';
 import styles from './Pages.module.css';
@@ -40,10 +41,11 @@ const GalleryItem = ({ project, index }: { project: Project, index: number }) =>
 };
 
 const BrandPage = () => {
-    const { brandId } = useParams();
+    const { categoryId, brandId } = useParams();
     const navigate = useNavigate();
 
-    const projects = projectsByBrand[brandId || ''] || [];
+    const allBrandProjects = projectsByBrand[brandId || ''] || [];
+    const projects = allBrandProjects.filter(p => !categoryId || p.category === categoryId);
 
     return (
         <div className={styles.page}>
@@ -54,7 +56,7 @@ const BrandPage = () => {
                     className={styles.header}
                 >
                     <button onClick={() => navigate('/#categories')} className={styles.backBtn}>← Back</button>
-                    <h1 className="serif">{brandId}</h1>
+                    <h1 className="serif">{brandMapping[brandId || ''] || brandId}</h1>
                     <p className="sans">Gallery showcase</p>
                 </motion.div>
 

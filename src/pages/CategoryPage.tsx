@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { allCategories } from '../data/projects';
+import { brandMapping } from '../data/brandMapping';
 import styles from './Pages.module.css';
 
 const CategoryPage = () => {
@@ -34,7 +35,7 @@ const CategoryPage = () => {
                             className={styles.brandCard}
                             onClick={() => navigate(`/category/${categoryId}/${brand}`)}
                         >
-                            <h3 className="serif">{brand}</h3>
+                            <h3 className="serif">{brandMapping[brand] || brand}</h3>
                             <span className="sans">View Projects →</span>
                         </motion.div>
                     ))}
