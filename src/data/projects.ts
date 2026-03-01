@@ -56,14 +56,14 @@ export const allCategories: Category[] = [
         name: 'Social Media Feed',
         description: 'High-engagement social layouts and creative feeds.',
         brands: Array.from(brandsWithImages),
-        coverImage: processedProjects.find(p => p.type === 'image')?.url || ''
+        coverImage: 'https://images.unsplash.com/photo-1724862936518-ae7fcfc052c1?q=80&w=2000&auto=format&fit=crop'
     },
     {
         id: 'reels',
         name: 'Reels Video',
         description: 'Dynamic short-form video content.',
         brands: Array.from(brandsWithVideos),
-        coverImage: processedProjects.find(p => p.type === 'video')?.url || ''
+        coverImage: 'https://images.unsplash.com/photo-1662479696175-6ca3b10830a6?q=80&w=2000&auto=format&fit=crop'
     },
 ];
 

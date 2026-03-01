@@ -27,13 +27,25 @@ const parseS3Uri = (uri: string) => {
 };
 
 /**
- * Asynchronously generates a signed URL for an S3 object.
+ * Asynchronously generates a URL for an S3 object.
+ * If VITE_CDN_URL is set, it returns a direct CDN link.
+ * Otherwise, it generates a signed URL.
  */
 export const getAssetUrl = async (uri: string): Promise<string> => {
     if (!uri) return '';
     if (uri.startsWith('http')) return uri;
 
     const { bucket, key } = parseS3Uri(uri);
+
+    const cdnUrl = import.meta.env.VITE_CDN_URL;
+    if (cdnUrl) {
+        // Use CDN if available for instant loading
+        let baseUrl = cdnUrl.endsWith('/') ? cdnUrl.slice(0, -1) : cdnUrl;
+        if (!baseUrl.startsWith('http')) {
+            baseUrl = `https://${baseUrl}`;
+        }
+        return `${baseUrl}/${key}`;
+    }
 
     if (!bucket || !key) {
         console.warn(`Invalid S3 URI or missing bucket name in .env for: ${uri}`);
