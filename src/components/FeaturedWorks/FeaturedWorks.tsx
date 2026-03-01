@@ -1,12 +1,14 @@
+import { useState } from 'react';
 import Masonry from 'react-masonry-css';
 import { motion } from 'framer-motion';
 import { featuredWorks } from '../../data/projects';
 import type { Project } from '../../data/projects';
 import { useAssetUrl } from '../../hooks/useAssetUrl';
 import Skeleton from '../Skeleton/Skeleton';
+import Modal from '../Modal/Modal';
 import styles from './FeaturedWorks.module.css';
 
-const FeaturedItem = ({ project, index }: { project: Project, index: number }) => {
+const FeaturedItem = ({ project, index, onClick }: { project: Project, index: number, onClick: () => void }) => {
     const { url: assetUrl, loading } = useAssetUrl(project.url);
 
     return (
@@ -16,6 +18,8 @@ const FeaturedItem = ({ project, index }: { project: Project, index: number }) =
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: (index % 2) * 0.1 }}
             className={styles.item}
+            onClick={onClick}
+            style={{ cursor: 'pointer' }}
         >
             <div className={styles.mediaContainer}>
                 {loading ? (
@@ -24,9 +28,7 @@ const FeaturedItem = ({ project, index }: { project: Project, index: number }) =
                     <video
                         src={assetUrl}
                         className={styles.image}
-                        autoPlay
                         muted
-                        loop
                         playsInline
                     />
                 ) : (
@@ -43,6 +45,8 @@ const FeaturedItem = ({ project, index }: { project: Project, index: number }) =
 };
 
 const FeaturedWorks = () => {
+    const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
     const breakpointColumnsObj = {
         default: 2,
         1100: 2,
@@ -68,11 +72,49 @@ const FeaturedWorks = () => {
                     columnClassName="my-masonry-grid_column"
                 >
                     {featuredWorks.map((project, index) => (
-                        <FeaturedItem key={project.id} project={project} index={index} />
+                        <FeaturedItem
+                            key={project.id}
+                            project={project}
+                            index={index}
+                            onClick={() => setSelectedProject(project)}
+                        />
                     ))}
                 </Masonry>
             </div>
+
+            <Modal
+                isOpen={!!selectedProject}
+                onClose={() => setSelectedProject(null)}
+                title={selectedProject?.title}
+            >
+                {selectedProject && (
+                    <div style={{ padding: '0', width: '100%', display: 'flex', justifyContent: 'center' }}>
+                        <MediaPreview project={selectedProject} />
+                    </div>
+                )}
+            </Modal>
         </section>
+    );
+};
+
+const MediaPreview = ({ project }: { project: Project }) => {
+    const { url, loading } = useAssetUrl(project.url);
+
+    if (loading) return <Skeleton aspectRatio={project.aspectRatio} />;
+
+    return project.type === 'video' ? (
+        <video
+            src={url}
+            controls
+            autoPlay
+            style={{ width: '100%', maxHeight: '80vh', outline: 'none' }}
+        />
+    ) : (
+        <img
+            src={url}
+            alt={project.title}
+            style={{ width: '100%', height: 'auto', maxHeight: '80vh', objectFit: 'contain' }}
+        />
     );
 };
 

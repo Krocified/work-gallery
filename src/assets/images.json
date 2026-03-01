@@ -1,70 +1,244 @@
 {
     "across": [
-        "100W final.mp4",
-        "2026 peduli lingkungan.mp4",
-        "38 watt car charger.png",
-        "ACROSS-waisak.png",
-        "Anti Badai.png",
-        "Charger kita bisa buat charge apa aja( NO MP).mp4",
-        "Produk Bintang 5.mp4",
-        "Wireless Charger.mp4",
-        "cas kilat.png",
-        "charger pake kabel x.png",
-        "fast & reliable.png",
-        "internet lelet.png",
-        "my savior.png",
-        "stable connection.png",
-        "stable fast charging.png",
-        "wireless 3in1.mp4"
+        {
+            "file": "100W final.mp4",
+            "title": "100W final"
+        },
+        {
+            "file": "2026 peduli lingkungan.mp4",
+            "title": "2026 peduli lingkungan"
+        },
+        {
+            "file": "38 watt car charger.png",
+            "title": "38 watt car charger"
+        },
+        {
+            "file": "ACROSS-waisak.png",
+            "title": "ACROSS waisak"
+        },
+        {
+            "file": "Anti Badai.png",
+            "title": "Anti Badai"
+        },
+        {
+            "file": "Charger kita bisa buat charge apa aja( NO MP).mp4",
+            "title": "Charger kita bisa buat charge apa aja( NO MP)"
+        },
+        {
+            "file": "Produk Bintang 5.mp4",
+            "title": "Produk Bintang 5"
+        },
+        {
+            "file": "Wireless Charger.mp4",
+            "title": "Wireless Charger"
+        },
+        {
+            "file": "cas kilat.png",
+            "title": "cas kilat"
+        },
+        {
+            "file": "charger pake kabel x.png",
+            "title": "charger pake kabel x"
+        },
+        {
+            "file": "fast & reliable.png",
+            "title": "fast & reliable"
+        },
+        {
+            "file": "internet lelet.png",
+            "title": "internet lelet"
+        },
+        {
+            "file": "my savior.png",
+            "title": "my savior"
+        },
+        {
+            "file": "stable connection.png",
+            "title": "stable connection"
+        },
+        {
+            "file": "stable fast charging.png",
+            "title": "stable fast charging"
+        },
+        {
+            "file": "wireless 3in1.mp4",
+            "title": "wireless 3in1"
+        }
     ],
     "fortytwo": [
-        "4 Pantangan Imlek.mp4",
-        "Buy more save more.png",
-        "Fortytwo.png",
-        "Murah vs Worth it.mp4",
-        "Tangkap Mejanya-copy.mp4",
-        "beli furniture 3 langkah.png",
-        "final reels 8 jam tidur.mp4",
-        "motion 42 best deals.mp4"
+        {
+            "file": "4 Pantangan Imlek.mp4",
+            "title": "4 Pantangan Imlek"
+        },
+        {
+            "file": "Buy more save more.png",
+            "title": "Buy more save more"
+        },
+        {
+            "file": "Fortytwo.png",
+            "title": "Fortytwo"
+        },
+        {
+            "file": "Murah vs Worth it.mp4",
+            "title": "Murah vs Worth it"
+        },
+        {
+            "file": "Tangkap Mejanya-copy.mp4",
+            "title": "Tangkap Mejanya copy"
+        },
+        {
+            "file": "beli furniture 3 langkah.png",
+            "title": "beli furniture 3 langkah"
+        },
+        {
+            "file": "final reels 8 jam tidur.mp4",
+            "title": "final reels 8 jam tidur"
+        },
+        {
+            "file": "motion 42 best deals.mp4",
+            "title": "motion 42 best deals"
+        }
     ],
     "idl": [
-        "3000 tujuan.mp4",
-        "Besar_Kecil.png",
-        "Dont Judge A book by its cover - IDL.mp4",
-        "IDL.mp4",
-        "Kalah Saing di Marketplace.mp4",
-        "Kursi Basah.mp4",
-        "OVERNIGHT SERVICE.mp4",
-        "Tega Banget!.mp4",
-        "breaking news- suara ganggu(1).mp4",
-        "hari pahlawan IDL.mp4",
-        "spesialis kirim barang khusus.png"
+        {
+            "file": "3000 tujuan.mp4",
+            "title": "3000 tujuan"
+        },
+        {
+            "file": "Besar_Kecil.png",
+            "title": "Besar Kecil"
+        },
+        {
+            "file": "Dont Judge A book by its cover - IDL.mp4",
+            "title": "Dont Judge A book by its cover   IDL"
+        },
+        {
+            "file": "IDL.mp4",
+            "title": "IDL"
+        },
+        {
+            "file": "Kalah Saing di Marketplace.mp4",
+            "title": "Kalah Saing di Marketplace"
+        },
+        {
+            "file": "Kursi Basah.mp4",
+            "title": "Kursi Basah"
+        },
+        {
+            "file": "OVERNIGHT SERVICE.mp4",
+            "title": "OVERNIGHT SERVICE"
+        },
+        {
+            "file": "Tega Banget!.mp4",
+            "title": "Tega Banget!"
+        },
+        {
+            "file": "breaking news- suara ganggu(1).mp4",
+            "title": "breaking news  suara ganggu(1)"
+        },
+        {
+            "file": "hari pahlawan IDL.mp4",
+            "title": "hari pahlawan IDL"
+        },
+        {
+            "file": "spesialis kirim barang khusus.png",
+            "title": "spesialis kirim barang khusus"
+        }
     ],
     "mwa": [
-        "feeds(1).png",
-        "feeds(2).png",
-        "feeds.png",
-        "hermetica source1.png",
-        "jimmy choo motion.mp4",
-        "lacoste original feeds.png"
+        {
+            "file": "feeds(1).png",
+            "title": "feeds(1)"
+        },
+        {
+            "file": "feeds(2).png",
+            "title": "feeds(2)"
+        },
+        {
+            "file": "feeds.png",
+            "title": "feeds"
+        },
+        {
+            "file": "hermetica source1.png",
+            "title": "hermetica source1"
+        },
+        {
+            "file": "jimmy choo motion.mp4",
+            "title": "jimmy choo motion"
+        },
+        {
+            "file": "lacoste original feeds.png",
+            "title": "lacoste original feeds"
+        }
     ],
     "tropee": [
-        "10.10 Noomi.jpg",
-        "10.10 Tropee.png",
-        "12.12 noomi.png",
-        "12.12 tropee.png",
-        "3.3 noomi.jpg",
-        "BODY LOTION SENSITIVE SKIN.png",
-        "Certif Market City 2.jpg",
-        "banner bundling.png",
-        "banner bw.png",
-        "banner sunscreen.jpg",
-        "cilubaa.jpg",
-        "payday feb noomi.png",
-        "payday noomi.png",
-        "payday rev..png",
-        "payday tropee dec.png",
-        "preview backdrop 4.png",
-        "twindate tropee.jpg"
+        {
+            "file": "10.10 Noomi.jpg",
+            "title": "10"
+        },
+        {
+            "file": "10.10 Tropee.png",
+            "title": "10"
+        },
+        {
+            "file": "12.12 noomi.png",
+            "title": "12"
+        },
+        {
+            "file": "12.12 tropee.png",
+            "title": "12"
+        },
+        {
+            "file": "3.3 noomi.jpg",
+            "title": "3"
+        },
+        {
+            "file": "BODY LOTION SENSITIVE SKIN.png",
+            "title": "BODY LOTION SENSITIVE SKIN"
+        },
+        {
+            "file": "Certif Market City 2.jpg",
+            "title": "Certif Market City 2"
+        },
+        {
+            "file": "banner bundling.png",
+            "title": "banner bundling"
+        },
+        {
+            "file": "banner bw.png",
+            "title": "banner bw"
+        },
+        {
+            "file": "banner sunscreen.jpg",
+            "title": "banner sunscreen"
+        },
+        {
+            "file": "cilubaa.jpg",
+            "title": "cilubaa"
+        },
+        {
+            "file": "payday feb noomi.png",
+            "title": "payday feb noomi"
+        },
+        {
+            "file": "payday noomi.png",
+            "title": "payday noomi"
+        },
+        {
+            "file": "payday rev..png",
+            "title": "payday rev"
+        },
+        {
+            "file": "payday tropee dec.png",
+            "title": "payday tropee dec"
+        },
+        {
+            "file": "preview backdrop 4.png",
+            "title": "preview backdrop 4"
+        },
+        {
+            "file": "twindate tropee.jpg",
+            "title": "twindate tropee"
+        }
     ]
 }

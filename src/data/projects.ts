@@ -24,8 +24,9 @@ const processedProjects: Project[] = [];
 const brandsWithImages = new Set<string>();
 const brandsWithVideos = new Set<string>();
 
-Object.entries(imagesData).forEach(([brandKey, files]) => {
-    files.forEach((filename: string, index: number) => {
+Object.entries(imagesData).forEach(([brandKey, items]) => {
+    (items as { file: string; title: string }[]).forEach((item, index) => {
+        const { file: filename, title } = item;
         const isVideo = filename.toLowerCase().endsWith('.mp4');
         const category = isVideo ? 'reels' : 'social-media';
 
@@ -37,7 +38,7 @@ Object.entries(imagesData).forEach(([brandKey, files]) => {
 
         processedProjects.push({
             id: `${brandKey}-${index}`,
-            title: filename.split('.')[0].replace(/[-_]/g, ' '),
+            title: title,
             brand: brandKey,
             category: category,
             type: isVideo ? 'video' : 'image',
