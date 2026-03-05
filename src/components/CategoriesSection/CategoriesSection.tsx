@@ -22,7 +22,6 @@ const CategoryCard = ({ cat, index }: { cat: Category, index: number }) => {
         >
             <div className={styles.overlay}></div>
             <div className={styles.content}>
-                <span className={`${styles.number} serif`}>0{index + 1}</span>
                 <h3 className="serif">{cat.name}</h3>
                 <p className="sans">{cat.description}</p>
                 <div className={styles.link}>
@@ -38,20 +37,22 @@ const CategoriesSection = () => {
     return (
         <section id="categories" className={styles.categories}>
             <div className={styles.container}>
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className={styles.header}
-                >
-                    <p className="sans uppercase">Discovery</p>
-                    <h2 className="serif">Explore <span className="italic">Categories</span></h2>
-                </motion.div>
+                <div className={styles.inner}>
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className={styles.header}
+                    >
+                        <p className="sans uppercase">Discovery</p>
+                        <h2 className="serif">Explore <span className="italic">Categories</span></h2>
+                    </motion.div>
 
-                <div className={styles.grid}>
-                    {allCategories.map((cat, index) => (
-                        <CategoryCard key={cat.id} cat={cat} index={index} />
-                    ))}
+                    <div className={styles.grid}>
+                        {allCategories.map((cat, index) => (
+                            <CategoryCard key={cat.id} cat={cat} index={index} />
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>

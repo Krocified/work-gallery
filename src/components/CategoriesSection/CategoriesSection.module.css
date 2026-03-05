@@ -9,28 +9,40 @@
     padding: 0 4rem;
 }
 
+/* Side-by-side: header on left, grid of cards on right */
+.inner {
+    display: flex;
+    gap: 5rem;
+    align-items: flex-start;
+}
+
 .header {
-    margin-bottom: 4rem;
-    text-align: center;
+    flex: 0 0 280px;
+    text-align: left;
+    position: sticky;
+    top: 120px;
 }
 
 .header p {
     font-size: 0.8rem;
     letter-spacing: 0.2em;
     color: var(--text-secondary);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
 }
 
 .header h2 {
     font-size: 3.5rem;
+    line-height: 1.05;
     margin: 0;
 }
 
 .header .italic {
     font-style: italic;
+    display: block;
 }
 
 .grid {
+    flex: 1;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
@@ -38,7 +50,7 @@
 
 .card {
     position: relative;
-    height: 500px;
+    height: 650px;
     background-size: cover;
     background-position: center;
     display: flex;
@@ -73,13 +85,6 @@
     z-index: 2;
     color: #ffffff;
     width: 100%;
-}
-
-.number {
-    font-size: 1rem;
-    opacity: 0.6;
-    display: block;
-    margin-bottom: 1rem;
 }
 
 .content h3 {
@@ -118,6 +123,26 @@
     transform: translateY(-5px);
 }
 
+/* Stack header above grid on medium screens */
+@media (max-width: 1200px) {
+    .inner {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .header {
+        flex: none;
+        position: static;
+        width: 100%;
+        text-align: center;
+    }
+
+    .header .italic {
+        display: inline;
+    }
+}
+
+/* Single column cards on tablet */
 @media (max-width: 1024px) {
     .grid {
         grid-template-columns: 1fr;
@@ -130,7 +155,7 @@
     }
 
     .card {
-        height: 400px;
+        height: 450px;
         padding: 2.5rem;
     }
 
