@@ -43,12 +43,12 @@ Object.entries(imagesData).forEach(([brandKey, items]) => {
             category: category,
             type: isVideo ? 'video' : 'image',
             url: `s3://${BUCKET_NAME}/${brandKey}/${filename}`,
-            aspectRatio: isVideo ? 'portrait' : 'square', // Defaulting for now
+            aspectRatio: isVideo ? 'portrait' : 'square',
         });
     });
 });
 
-export const featuredWorks: Project[] = processedProjects.slice(0, 6);
+export const featuredWorks: Project[] = processedProjects.slice(1, 7);
 
 export const allCategories: Category[] = [
     {
