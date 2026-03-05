@@ -1,73 +1,83 @@
-# React + TypeScript + Vite
+# Work Gallery • Archive
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A high-performance, visually immersive portfolio gallery for creative professionals. Built with **React 19**, **Vite**, and **TypeScript**, this archive efficiently manages and serves a large collection of social media layouts, brand assets, and video reels directly from **AWS S3**.
 
-Currently, two official plugins are available:
+<div align="center">
+  <img src="https://images.unsplash.com/photo-1724862936518-ae7fcfc052c1?q=80&w=2000&auto=format&fit=crop" width="100%" alt="Work Gallery Preview" />
+</div>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Key Features
 
-## React Compiler
+- 🖼️ **Dynamic Media Gallery**: Seamlessly supports high-resolution images and short-form video content (Reels).
+- 🏷️ **Brand-Centric Organization**: Projects are automatically grouped by brand and content type for intuitive navigation.
+- ⚡ **S3 Content Delivery**: Direct integration with AWS S3 for scalable asset hosting, featuring signed URL generation and optional CDN support.
+- 🎭 **Fluid Experience**: Smooth page transitions and micro-interactions powered by **Framer Motion**.
+- 🧱 **Masonry Layout**: Elegant, responsive grid system for varying aspect ratios.
+- 📱 **Responsive Design**: Fully optimized for mobile, tablet, and desktop viewing.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+- **Frontend**: [React 19](https://react.dev/), [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool**: [Vite 8](https://vite.dev/)
+- **Styling**: Vanilla CSS (PostCSS)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Cloud Backend**: [AWS SDK for JavaScript](https://aws.amazon.com/sdk-for-javascript/) (S3)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Getting Started
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 1. Prerequisites
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Node.js (v18 or higher)
+- npm or yarn
+- AWS S3 bucket with your portfolio assets
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 2. Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/Krocified/work-gallery.git
+
+# Navigate to the directory
+cd work-gallery
+
+# Install dependencies
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 3. Environment Setup
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Create a `.env` file in the root directory and add your AWS credentials:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```env
+VITE_AWS_REGION=
+VITE_AWS_BUCKET_NAME=
+VITE_CONTACT_EMAIL=
+VITE_CONTACT_PHONE=
+VITE_CDN_URL=
+
 ```
+
+### 4. Development
+
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:5173`.
+
+## 📁 Project Structure
+
+- `src/components`: Reusable UI components (Nav, Gallery, Layouts).
+- `src/data`: Project definitions and brand mappings.
+- `src/pages`: Main application views (Home, Category, Brand).
+- `src/utils`: Helper functions for S3 asset fetching and URL generation.
+- `src/assets`: Local static assets and image metadata.
+
+## 🤝 Collaboration
+
+Developed as a collaborative project with [Michael Jong](https://github.com/Krocified).
+
+---
+
+© 2026 Archive. All rights reserved.
