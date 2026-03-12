@@ -194,6 +194,10 @@
             "title": "Hari Pahlawan IDL Greeting"
         },
         {
+            "file": "IDL Anniv(1).mp4",
+            "title": "IDL Anniversary"
+        },
+        {
             "file": "spesialis kirim barang khusus.png",
             "title": "Spesialis Kirim Barang Khusus"
         }
@@ -239,6 +243,14 @@
                 "Your Brand is Going to Fail/3.png"
             ],
             "title": "Your Brand is Going to Fail"
+        },
+        {
+            "file": "Starter Lite Packagee.mp4",
+            "title": "Starter Lite Package"
+        },
+        {
+            "file": "Testimony Sanyo.mp4",
+            "title": "Testimony Sanyo"
         },
         {
             "file": "Scroll or Stay.png",
@@ -350,5 +362,13 @@
             "file": "CHILI COLA 2.png",
             "title": "Chili Cola Flavor Drop"
         }
+    ],
+    "featured": [
+        "Anti Badai.png",
+        "Tren Logistik B2B 2026/1.png",
+        "feeds(1).png",
+        "Kalah Saing di Marketplace.mp4",
+        "4 Pantangan Imlek.mp4",
+        "feeds.png"
     ]
 }

@@ -26,6 +26,8 @@ const brandsWithImages = new Set<string>();
 const brandsWithVideos = new Set<string>();
 
 Object.entries(imagesData).forEach(([brandKey, items]) => {
+    if (brandKey === 'featured') return;
+
     (items as any[]).forEach((item, index) => {
         const { file: filename, files, title } = item;
         const isCarousel = Array.isArray(files);
@@ -63,7 +65,18 @@ Object.entries(imagesData).forEach(([brandKey, items]) => {
     });
 });
 
-export const featuredWorks: Project[] = processedProjects.slice(1, 7);
+const featuredFilenames = (imagesData as any).featured || [];
+
+export const featuredWorks: Project[] = featuredFilenames.map((featuredFile: string) => {
+    return processedProjects.find(p => {
+        // Check if the original filename is in the URL or URLs
+        const s3Prefix = `s3://${BUCKET_NAME}/${p.brand}/`;
+        if (p.type === 'carousel') {
+            return p.urls?.some(url => url === `${s3Prefix}${featuredFile}`);
+        }
+        return p.url === `${s3Prefix}${featuredFile}`;
+    });
+}).filter(Boolean) as Project[];
 
 export const allCategories: Category[] = [
     {
