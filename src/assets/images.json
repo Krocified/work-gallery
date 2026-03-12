@@ -63,9 +63,32 @@
         {
             "file": "wireless 3in1.mp4",
             "title": "Wireless 3-in-1"
+        },
+        {
+            "file": "Mudik.png",
+            "title": "Mudik"
         }
     ],
     "fortytwo": [
+        {
+            "title": "Furniture yang awet",
+            "files": [
+                "furniture yang awet/1.png",
+                "furniture yang awet/2.png",
+                "furniture yang awet/3.png",
+                "furniture yang awet/4.png"
+            ]
+        },
+        {
+            "title": "Tipe material sofa",
+            "files": [
+                "Tipe material sofa/1.png",
+                "Tipe material sofa/2.png",
+                "Tipe material sofa/3.png",
+                "Tipe material sofa/4.png",
+                "Tipe material sofa/5.png"
+            ]
+        },
         {
             "file": "4 Pantangan Imlek.mp4",
             "title": "4 Pantangan Imlek"
@@ -97,9 +120,43 @@
         {
             "file": "motion 42 best deals.mp4",
             "title": "FortyTwo Best Deals"
+        },
+        {
+            "file": "Furnitur untuk Anak(2).mp4",
+            "title": "Furnitur untuk Anak"
         }
     ],
     "idl": [
+        {
+            "title": "Asuransi IDL",
+            "files": [
+                "Asuransi IDL/1.png",
+                "Asuransi IDL/2.png"
+            ]
+        },
+        {
+            "title": "Jangan Geser",
+            "files": [
+                "Jangan Geser/1.png",
+                "Jangan Geser/2.png"
+            ]
+        },
+        {
+            "title": "Mitos Fakta",
+            "files": [
+                "Mitos Fakta/1.png",
+                "Mitos Fakta/2.png"
+            ]
+        },
+        {
+            "title": "Tren Logistik B2B 2026",
+            "files": [
+                "Tren Logistik B2B 2026/1.png",
+                "Tren Logistik B2B 2026/2.png",
+                "Tren Logistik B2B 2026/3.png",
+                "Tren Logistik B2B 2026/4.png"
+            ]
+        },
         {
             "file": "3000 tujuan.mp4",
             "title": "3000 Tujuan"
@@ -145,6 +202,47 @@
         {
             "file": "Kalah Saing di Marketplace.mp4",
             "title": "Kalah Saing di Marketplace"
+        },
+        {
+            "files": [
+                "eCommerce Update Lazada/1.png",
+                "eCommerce Update Lazada/2.png",
+                "eCommerce Update Lazada/3.png",
+                "eCommerce Update Lazada/4.png",
+                "eCommerce Update Lazada/5.png",
+                "eCommerce Update Lazada/6.png"
+            ],
+            "title": "eCommerce Update Lazada"
+        },
+        {
+            "files": [
+                "Hal yang S2G Tolak/1.png",
+                "Hal yang S2G Tolak/2.png",
+                "Hal yang S2G Tolak/3.png"
+            ],
+            "title": "Hal yang S2G Tolak"
+        },
+        {
+            "files": [
+                "Makincerdik IKEA/1.png",
+                "Makincerdik IKEA/2.png",
+                "Makincerdik IKEA/3.png",
+                "Makincerdik IKEA/4.png",
+                "Makincerdik IKEA/5.png"
+            ],
+            "title": "Makincerdik IKEA"
+        },
+        {
+            "files": [
+                "Your Brand is Going to Fail/1.png",
+                "Your Brand is Going to Fail/2.png",
+                "Your Brand is Going to Fail/3.png"
+            ],
+            "title": "Your Brand is Going to Fail"
+        },
+        {
+            "file": "Scroll or Stay.png",
+            "title": "Scroll or Stay"
         }
     ],
     "mwa": [
@@ -241,6 +339,16 @@
         {
             "file": "twindate tropee.jpg",
             "title": "Twindate Tropee"
+        }
+    ],
+    "tigersnus": [
+        {
+            "file": "Holiday 1.png",
+            "title": "Holiday Starter Pack"
+        },
+        {
+            "file": "CHILI COLA 2.png",
+            "title": "Chili Cola Flavor Drop"
         }
     ]
 }

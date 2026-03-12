@@ -5,8 +5,9 @@ export interface Project {
     title: string;
     category: 'social-media' | 'reels' | 'featured';
     brand: string;
-    type: 'image' | 'video';
-    url: string;
+    type: 'image' | 'video' | 'carousel';
+    url: string; // Used for thumbnails and single files
+    urls?: string[]; // Used for carousels
     aspectRatio: 'square' | 'portrait' | 'landscape';
 }
 
@@ -25,9 +26,10 @@ const brandsWithImages = new Set<string>();
 const brandsWithVideos = new Set<string>();
 
 Object.entries(imagesData).forEach(([brandKey, items]) => {
-    (items as { file: string; title: string }[]).forEach((item, index) => {
-        const { file: filename, title } = item;
-        const isVideo = filename.toLowerCase().endsWith('.mp4');
+    (items as any[]).forEach((item, index) => {
+        const { file: filename, files, title } = item;
+        const isCarousel = Array.isArray(files);
+        const isVideo = !isCarousel && filename?.toLowerCase().endsWith('.mp4');
         const category = isVideo ? 'reels' : 'social-media';
 
         if (isVideo) {
@@ -36,15 +38,28 @@ Object.entries(imagesData).forEach(([brandKey, items]) => {
             brandsWithImages.add(brandKey);
         }
 
-        processedProjects.push({
-            id: `${brandKey}-${index}`,
-            title: title,
-            brand: brandKey,
-            category: category,
-            type: isVideo ? 'video' : 'image',
-            url: `s3://${BUCKET_NAME}/${brandKey}/${filename}`,
-            aspectRatio: isVideo ? 'portrait' : 'square',
-        });
+        if (isCarousel) {
+            processedProjects.push({
+                id: `${brandKey}-${index}`,
+                title: title,
+                brand: brandKey,
+                category: category,
+                type: 'carousel',
+                url: `s3://${BUCKET_NAME}/${brandKey}/${files[0]}`,
+                urls: files.map((f: string) => `s3://${BUCKET_NAME}/${brandKey}/${f}`),
+                aspectRatio: item.aspectRatio || 'square',
+            });
+        } else {
+            processedProjects.push({
+                id: `${brandKey}-${index}`,
+                title: title,
+                brand: brandKey,
+                category: category,
+                type: isVideo ? 'video' : 'image',
+                url: `s3://${BUCKET_NAME}/${brandKey}/${filename}`,
+                aspectRatio: isVideo ? 'portrait' : 'square',
+            });
+        }
     });
 });
 
