@@ -3,7 +3,8 @@ export const brandMapping: Record<string, string> = {
     "fortytwo": "FortyTwo",
     "idl": "IDL Courier Express",
     "mwa": "Multi Wangi Alami",
-    "tropee": "Tropee bebe"
+    "tropee": "Tropee bebe",
+    "store2go": "Store2Go"
 };
 
 export const getBrandName = (key: string): string => {

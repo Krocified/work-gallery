@@ -117,10 +117,6 @@
             "title": "IDL"
         },
         {
-            "file": "Kalah Saing di Marketplace.mp4",
-            "title": "Kalah Saing di Marketplace"
-        },
-        {
             "file": "Kursi Basah.mp4",
             "title": "Kursi Basah"
         },
@@ -145,10 +141,16 @@
             "title": "Spesialis Kirim Barang Khusus"
         }
     ],
+    "store2go": [
+        {
+            "file": "Kalah Saing di Marketplace.mp4",
+            "title": "Kalah Saing di Marketplace"
+        }
+    ],
     "mwa": [
         {
             "file": "feeds(1).png",
-            "title": "General Feed Post"
+            "title": "Jimmy Choo I Want Choo Le Perfume"
         },
         {
             "file": "feeds(2).png",

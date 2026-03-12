@@ -64,7 +64,7 @@ const BrandPage = () => {
                 >
                     <button onClick={() => navigate('/#categories')} className={styles.backBtn}>← Back</button>
                     <h1 className="serif">{brandMapping[brandId || ''] || brandId}</h1>
-                    <p className="sans">{categoryId === 'reels' ? 'Reels' : 'Gallery'} showcase</p>
+                    <p className="sans">Social Media Design</p>
                 </motion.div>
 
                 {projects.length > 0 ? (
