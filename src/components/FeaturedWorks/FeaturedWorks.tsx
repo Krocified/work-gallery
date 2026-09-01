@@ -8,16 +8,25 @@ import Skeleton from '../Skeleton/Skeleton';
 import Modal from '../Modal/Modal';
 import styles from './FeaturedWorks.module.css';
 
-const FeaturedItem = ({ project, index, onClick }: { project: Project, index: number, onClick: () => void }) => {
+const itemVariants = {
+    visible: { opacity: 1, y: 0 },
+    hidden: { opacity: 0, y: 20 },
+};
+
+const listVariants = {
+    visible: { transition: { staggerChildren: 0.08 } },
+    hidden: {},
+};
+
+const FeaturedItem = ({ project, onClick }: { project: Project, onClick: () => void }) => {
     const { url: assetUrl, loading } = useAssetUrl(project.url);
 
     return (
         <motion.button
             type="button"
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: (index % 2) * 0.1 }}
+            variants={itemVariants}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             className={styles.item}
             onClick={onClick}
             aria-label={`View ${project.title}`}
@@ -68,20 +77,26 @@ const FeaturedWorks = () => {
                     <h2 className="serif">Featured <span className="italic">Works</span></h2>
                 </motion.div>
 
-                <Masonry
-                    breakpointCols={breakpointColumnsObj}
-                    className="my-masonry-grid"
-                    columnClassName="my-masonry-grid_column"
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={listVariants}
                 >
-                    {featuredWorks.map((project, index) => (
-                        <FeaturedItem
-                            key={project.id}
-                            project={project}
-                            index={index}
-                            onClick={() => setSelectedProject(project)}
-                        />
-                    ))}
-                </Masonry>
+                    <Masonry
+                        breakpointCols={breakpointColumnsObj}
+                        className="my-masonry-grid"
+                        columnClassName="my-masonry-grid_column"
+                    >
+                        {featuredWorks.map((project) => (
+                            <FeaturedItem
+                                key={project.id}
+                                project={project}
+                                onClick={() => setSelectedProject(project)}
+                            />
+                        ))}
+                    </Masonry>
+                </motion.div>
             </div>
 
             <Modal

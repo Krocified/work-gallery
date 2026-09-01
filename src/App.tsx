@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, MotionConfig } from 'framer-motion';
 import { useEffect } from 'react';
 import Nav from './components/Nav/Nav';
 import HomePage from './pages/HomePage';
@@ -42,19 +42,21 @@ const AnimatedRoutes = () => {
 function App() {
   return (
     <Router>
-      <ScrollToTop />
-      <div className="app">
-        <Nav />
-        <main>
-          <AnimatedRoutes />
-        </main>
-        <footer className="footer sans">
-            <p>© {new Date().getFullYear()} Archive. All rights reserved.</p>
-            <p>
-                Collaboration with <a href="https://github.com/Krocified" target="_blank" rel="noopener noreferrer">Michael Jong</a>
-          </p>
-        </footer>
-      </div>
+      <MotionConfig transition={{ type: 'spring', stiffness: 150, damping: 25 }}>
+        <ScrollToTop />
+        <div className="app">
+          <Nav />
+          <main>
+            <AnimatedRoutes />
+          </main>
+          <footer className="footer sans">
+              <p>© {new Date().getFullYear()} Archive. All rights reserved.</p>
+              <p>
+                  Collaboration with <a href="https://github.com/Krocified" target="_blank" rel="noopener noreferrer">Michael Jong</a>
+            </p>
+          </footer>
+        </div>
+      </MotionConfig>
     </Router>
   );
 }

@@ -6,7 +6,7 @@ body::after {
   width: 300%;
   height: 300%;
   background-image: url("https://www.transparenttextures.com/patterns/pinstriped-suit.png");
-  opacity: 0.03;
+  opacity: 0.02;
   pointer-events: none;
   z-index: 9999;
   animation: grain 8s steps(10) infinite;
@@ -57,18 +57,33 @@ body::after {
 }
 
 :root {
-  --bg-color: #f5f5dc;
-  /* Classic Beige */
-  --bg-accent: #e8e4d9;
-  /* Slightly darker beige */
-  --text-primary: #2d2d2d;
-  /* Off-black */
-  --text-secondary: #5a5a5a;
-  /* Greyish */
-  --accent-color: #8b7d6b;
-  /* Earthy brown-grey */
+  /* Mofusand pastel palette */
+  --bg-color: #FFF8F2;
+  /* Cream */
+  --bg-accent: #FDF0E7;
+  /* Warm shell */
+  --bg-pink: #F9D7D3;
+  /* Sakura pink */
+  --bg-blue: #D6EBF0;
+  /* Powder blue */
+  --blue-brand: #70A2B6;
+  /* mofusand brand blue (hero) */
+  --bg-mint: #DFF0E2;
+  /* Soft mint */
+  --text-primary: #443A34;
+  /* Warm brown-gray */
+  --text-secondary: #8A7A70;
+  /* Muted taupe */
+  --accent-color: #E8A0A6;
+  /* Dusty rose (fill only, not text) */
+  --accent-deep: #C97B84;
+  /* Deep rose (text/interactive) */
+  --radius-soft: 12px;
+  --radius-round: 24px;
+  --shadow-soft: 0 8px 24px rgba(68, 58, 52, 0.08);
+  --shadow-lift: 0 16px 40px rgba(68, 58, 52, 0.14);
 
-  --font-serif: 'Playfair Display', serif;
+  --font-serif: 'Antic Didone', serif;
   --font-sans: 'Inter', sans-serif;
 }
 
@@ -101,8 +116,9 @@ h3,
 h4,
 .serif {
   font-family: var(--font-serif);
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.2;
+  letter-spacing: 0.01em;
 }
 
 p,
@@ -128,15 +144,16 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent-color);
+  outline: 2px solid var(--accent-deep);
   outline-offset: 4px;
 }
 
 .footer {
   padding: 4rem 2rem;
   text-align: center;
-  opacity: 0.5;
   font-size: 0.8rem;
+  color: var(--text-secondary);
+  background-color: var(--bg-accent);
 }
 
 .footer p:last-child {
@@ -153,6 +170,15 @@ button {
   text-align: center;
 }
 
+.not-found h1 {
+  margin: 0 auto 2rem;
+  max-width: 480px;
+  padding: 3rem 2rem;
+  background-color: var(--bg-pink);
+  border-radius: var(--radius-round);
+  box-shadow: var(--shadow-soft);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -167,7 +193,7 @@ button {
 /* Custom selection color */
 ::selection {
   background: var(--accent-color);
-  color: var(--bg-color);
+  color: var(--text-primary);
 }
 
 /* Smooth scrolling */

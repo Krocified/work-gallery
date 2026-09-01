@@ -15,8 +15,9 @@ const CategoryPage = () => {
         <div className={styles.page}>
             <div className={styles.container}>
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    transition={{ duration: 0.6 }}
                     className={styles.header}
                 >
                     <Link to="/#categories" className={styles.backBtn}>← Back</Link>
@@ -24,13 +25,17 @@ const CategoryPage = () => {
                     <p className="sans">{category.description}</p>
                 </motion.div>
 
-                <div className={styles.brandGrid}>
-                    {category.brands.map((brand, index) => (
+                <motion.div
+                    className={styles.brandGrid}
+                    initial="hidden"
+                    animate="visible"
+                    variants={{ visible: { transition: { staggerChildren: 0.08 } }, hidden: {} }}
+                >
+                    {category.brands.map((brand) => (
                         <motion.div
                             key={brand}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1 }}
+                            variants={{ visible: { opacity: 1, y: 0 }, hidden: { opacity: 0, y: 10 } }}
+                            whileHover={{ scale: 1.02 }}
                             className={styles.brandCard}
                         >
                             <Link to={`/category/${categoryId}/${brand}`} className={styles.brandCardLink}>
@@ -39,7 +44,7 @@ const CategoryPage = () => {
                             </Link>
                         </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </div>
     );

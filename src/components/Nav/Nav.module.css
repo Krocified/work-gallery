@@ -10,8 +10,25 @@
 
 .scrolled {
     padding: 1rem 0;
-    background: rgba(245, 245, 220, 0.8);
+    background: rgba(255, 248, 242, 0.75);
     backdrop-filter: blur(10px);
+}
+
+.progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-deep);
+    transform-origin: 0 50%;
+}
+
+/* Over the blue hero: transparent nav with white text */
+.overHero .logo a,
+.overHero .desktopLinks a,
+.overHero .mobileToggle {
+    color: #ffffff;
 }
 
 .container {
@@ -33,6 +50,7 @@
 .logo a:hover {
     transform: scale(1.05);
     opacity: 1;
+    color: var(--accent-deep);
 }
 
 .desktopLinks {

@@ -32,14 +32,14 @@
     align-items: center;
     gap: 0.75rem;
     padding: 1rem 2rem;
-    border: 1px solid var(--accent-color);
-    border-radius: 100px;
-    transition: all 0.3s ease;
+    background-color: var(--bg-blue);
+    border-radius: var(--radius-soft);
+    box-shadow: var(--shadow-soft);
+    transition: box-shadow 0.3s ease;
 }
 
 .contactLink:hover {
-    background-color: var(--accent-color);
-    color: var(--bg-color);
+    box-shadow: var(--shadow-lift);
     opacity: 1;
 }
 

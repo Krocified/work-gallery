@@ -2,13 +2,15 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './Nav.module.css';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 
 const Nav = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
     const isHome = location.pathname === '/';
+    const { scrollYProgress } = useScroll();
+    const progressScale = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
     useEffect(() => {
         const handleScroll = () => {
@@ -24,8 +26,11 @@ const Nav = () => {
         { name: 'Contact', href: isHome ? '#contact' : '/#contact' },
     ];
 
+    const overHero = isHome && !scrolled;
+
     return (
-        <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
+        <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''} ${overHero ? styles.overHero : ''}`}>
+            <motion.div className={styles.progress} style={{ scaleX: progressScale, originX: 0 }} />
             <div className={styles.container}>
                 <div className={styles.logo}>
                     <Link to="/" className="serif">æ Archive</Link>

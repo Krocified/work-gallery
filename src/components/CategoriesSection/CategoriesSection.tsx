@@ -1,22 +1,30 @@
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { allCategories } from '../../data/projects';
 import type { Category } from '../../data/projects';
 import { useAssetUrl } from '../../hooks/useAssetUrl';
 import styles from './CategoriesSection.module.css';
 
-const CategoryCard = ({ cat, index }: { cat: Category, index: number }) => {
+const CategoryCard = ({ cat }: { cat: Category }) => {
     const { url: assetUrl } = useAssetUrl(cat.coverImage);
+    const cardRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: cardRef,
+        offset: ['start end', 'center center'],
+    });
+    const clipPath = useTransform(
+        scrollYProgress,
+        [0, 1],
+        ['inset(0% 50% 0% 50%)', 'inset(0% 0% 0% 0%)'],
+    );
 
     return (
         <motion.div
-            key={cat.id}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            ref={cardRef}
+            whileHover={{ scale: 1.01 }}
             className={styles.card}
-            style={{ backgroundImage: `url("${assetUrl}")` }}
+            style={{ backgroundImage: `url("${assetUrl}")`, clipPath }}
         >
             <Link to={`/category/${cat.id}`} className={styles.cardLink}>
                 <div className={styles.overlay}></div>
@@ -39,9 +47,10 @@ const CategoriesSection = () => {
             <div className={styles.container}>
                 <div className={styles.inner}>
                     <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, x: -20, filter: 'blur(8px)' }}
+                        whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
                         viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
                         className={styles.header}
                     >
                         <p className="sans uppercase">Discovery</p>
@@ -49,8 +58,8 @@ const CategoriesSection = () => {
                     </motion.div>
 
                     <div className={styles.grid}>
-                        {allCategories.map((cat, index) => (
-                            <CategoryCard key={cat.id} cat={cat} index={index} />
+                        {allCategories.map((cat) => (
+                            <CategoryCard key={cat.id} cat={cat} />
                         ))}
                     </div>
                 </div>

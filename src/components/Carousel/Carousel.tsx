@@ -73,7 +73,7 @@ const Carousel = ({ urls, title, aspectRatio, onItemClick }: CarouselProps) => {
             <motion.div
                 className={styles.carouselTrack}
                 animate={{ x: `-${currentIndex * 100}%` }}
-                transition={{ type: 'spring', damping: 30, stiffness: 200 }}
+                transition={{ type: 'spring', damping: 30, stiffness: 150 }}
             >
                 {urls.map((url, index) => (
                     <CarouselItem key={url} url={url} title={`${title}, item ${index + 1}`} aspectRatio={aspectRatio} />

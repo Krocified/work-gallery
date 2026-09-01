@@ -14,9 +14,9 @@
 }
 
 .modal {
-    background: #0a0a0a;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
+    background: #3B332E;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-round);
     width: 100%;
     max-width: 1000px;
     max-height: 90vh;
@@ -33,7 +33,7 @@
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    background: rgba(10, 10, 10, 0.8);
+    background: rgba(59, 51, 46, 0.8);
     backdrop-filter: blur(4px);
     z-index: 10;
 }

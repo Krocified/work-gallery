@@ -10,14 +10,13 @@ import Modal from '../components/Modal/Modal';
 import Carousel from '../components/Carousel/Carousel';
 import styles from './Pages.module.css';
 
-const GalleryItem = ({ project, index, onClick }: { project: Project, index: number, onClick: (mediaIndex?: number) => void }) => {
+const GalleryItem = ({ project, onClick }: { project: Project, onClick: (mediaIndex?: number) => void }) => {
     const { url: assetUrl, loading } = useAssetUrl(project.url);
 
     return (
         <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: index * 0.1 }}
             className={styles.galleryItem}
         >
             {loading ? (
@@ -76,8 +75,9 @@ const BrandPage = () => {
         <div className={styles.page}>
             <div className={styles.container}>
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    transition={{ duration: 0.6 }}
                     className={styles.header}
                 >
                     <Link to="/#categories" className={styles.backBtn}>← Back</Link>
@@ -87,11 +87,10 @@ const BrandPage = () => {
 
                 {projects.length > 0 ? (
                     <div className={styles.galleryGrid}>
-                        {projects.map((project, index) => (
+                        {projects.map((project) => (
                             <GalleryItem
                                 key={project.id}
                                 project={project}
-                                index={index}
                                 onClick={(mediaIndex) => handleProjectClick(project, mediaIndex)}
                             />
                         ))}
