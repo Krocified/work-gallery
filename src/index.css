@@ -127,6 +127,43 @@ button {
   font-family: inherit;
 }
 
+:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 4px;
+}
+
+.footer {
+  padding: 4rem 2rem;
+  text-align: center;
+  opacity: 0.5;
+  font-size: 0.8rem;
+}
+
+.footer p:last-child {
+  margin-top: 0.5rem;
+}
+
+.footer a {
+  text-decoration: underline;
+  opacity: 1;
+}
+
+.not-found {
+  padding: 12rem 2rem;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* Custom selection color */
 ::selection {
   background: var(--accent-color);

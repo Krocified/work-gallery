@@ -12,14 +12,15 @@ const FeaturedItem = ({ project, index, onClick }: { project: Project, index: nu
     const { url: assetUrl, loading } = useAssetUrl(project.url);
 
     return (
-        <motion.div
+        <motion.button
+            type="button"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: (index % 2) * 0.1 }}
             className={styles.item}
             onClick={onClick}
-            style={{ cursor: 'pointer' }}
+            aria-label={`View ${project.title}`}
         >
             <div className={styles.mediaContainer}>
                 {loading ? (
@@ -30,9 +31,10 @@ const FeaturedItem = ({ project, index, onClick }: { project: Project, index: nu
                         className={styles.image}
                         muted
                         playsInline
+                        preload="metadata"
                     />
                 ) : (
-                    <img src={assetUrl} alt={project.title} className={styles.image} />
+                    <img src={assetUrl} alt={project.title} className={styles.image} loading="lazy" decoding="async" />
                 )}
                 {!loading && (
                     <div className={styles.overlay}>
@@ -40,7 +42,7 @@ const FeaturedItem = ({ project, index, onClick }: { project: Project, index: nu
                     </div>
                 )}
             </div>
-        </motion.div>
+        </motion.button>
     );
 };
 
@@ -107,6 +109,7 @@ const MediaPreview = ({ project }: { project: Project }) => {
             src={url}
             controls
             autoPlay
+            preload="metadata"
             style={{ width: '100%', maxHeight: '80vh', outline: 'none' }}
         />
     ) : (

@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { allCategories } from '../../data/projects';
 import type { Category } from '../../data/projects';
@@ -6,7 +6,6 @@ import { useAssetUrl } from '../../hooks/useAssetUrl';
 import styles from './CategoriesSection.module.css';
 
 const CategoryCard = ({ cat, index }: { cat: Category, index: number }) => {
-    const navigate = useNavigate();
     const { url: assetUrl } = useAssetUrl(cat.coverImage);
 
     return (
@@ -17,18 +16,19 @@ const CategoryCard = ({ cat, index }: { cat: Category, index: number }) => {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
             className={styles.card}
-            onClick={() => navigate(`/category/${cat.id}`)}
             style={{ backgroundImage: `url("${assetUrl}")` }}
         >
-            <div className={styles.overlay}></div>
-            <div className={styles.content}>
-                <h3 className="serif">{cat.name}</h3>
-                <p className="sans">{cat.description}</p>
-                <div className={styles.link}>
-                    <span className="sans">Explore Brands</span>
-                    <span className={styles.arrow}>→</span>
+            <Link to={`/category/${cat.id}`} className={styles.cardLink}>
+                <div className={styles.overlay}></div>
+                <div className={styles.content}>
+                    <h3 className="serif">{cat.name}</h3>
+                    <p className="sans">{cat.description}</p>
+                    <div className={styles.link}>
+                        <span className="sans">Explore Brands</span>
+                        <span className={styles.arrow} aria-hidden="true">→</span>
+                    </div>
                 </div>
-            </div>
+            </Link>
         </motion.div>
     );
 };

@@ -1,18 +1,5 @@
-import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+const assetUrlCache = new Map<string, string>();
 
-const s3Client = new S3Client({
-    region: import.meta.env.VITE_AWS_REGION,
-    credentials: {
-        accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY_ID,
-        secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY,
-    },
-});
-
-/**
- * Parses an S3 URI (s3://bucket-name/key) or handles a raw key.
- * Returns the bucket name and the object key.
- */
 const parseS3Uri = (uri: string) => {
     if (uri.startsWith('s3://')) {
         const parts = uri.replace('s3://', '').split('/');
@@ -26,16 +13,14 @@ const parseS3Uri = (uri: string) => {
     };
 };
 
-/**
- * Asynchronously generates a URL for an S3 object.
- * If VITE_CDN_URL is set, it returns a direct CDN link.
- * Otherwise, it generates a signed URL.
- */
 export const getAssetUrl = async (uri: string): Promise<string> => {
     if (!uri) return '';
     if (uri.startsWith('http')) return uri;
+    const cachedUrl = assetUrlCache.get(uri);
+    if (cachedUrl) return cachedUrl;
 
     const { bucket, key } = parseS3Uri(uri);
+    const encodedKey = key.split('/').map(encodeURIComponent).join('/');
 
     const cdnUrl = import.meta.env.VITE_CDN_URL;
     if (cdnUrl) {
@@ -44,24 +29,18 @@ export const getAssetUrl = async (uri: string): Promise<string> => {
         if (!baseUrl.startsWith('http')) {
             baseUrl = `https://${baseUrl}`;
         }
-        return `${baseUrl}/${key}`;
+        const resolvedUrl = `${baseUrl}/${encodedKey}`;
+        assetUrlCache.set(uri, resolvedUrl);
+        return resolvedUrl;
     }
 
-    if (!bucket || !key) {
-        console.warn(`Invalid S3 URI or missing bucket name in .env for: ${uri}`);
+    const region = import.meta.env.VITE_AWS_REGION;
+    if (!bucket || !key || !region) {
+        console.warn(`Invalid asset URI or missing public asset configuration for: ${uri}`);
         return uri;
     }
 
-    try {
-        const command = new GetObjectCommand({
-            Bucket: bucket,
-            Key: key,
-        });
-
-        // Generate a signed URL that expires in 1 hour
-        return await getSignedUrl(s3Client, command, { expiresIn: 3600 });
-    } catch (error) {
-        console.error('Error generating signed URL:', error);
-        return uri;
-    }
+    const resolvedUrl = `https://${bucket}.s3.${region}.amazonaws.com/${encodedKey}`;
+    assetUrlCache.set(uri, resolvedUrl);
+    return resolvedUrl;
 };

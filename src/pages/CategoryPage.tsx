@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { allCategories } from '../data/projects';
 import { brandMapping } from '../data/brandMapping';
@@ -6,11 +6,10 @@ import styles from './Pages.module.css';
 
 const CategoryPage = () => {
     const { categoryId } = useParams();
-    const navigate = useNavigate();
 
     const category = allCategories.find(c => c.id === categoryId);
 
-    if (!category) return <div>Category not found</div>;
+    if (!category) return <Navigate to="/not-found" replace />;
 
     return (
         <div className={styles.page}>
@@ -20,7 +19,7 @@ const CategoryPage = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className={styles.header}
                 >
-                    <button onClick={() => navigate('/#categories')} className={styles.backBtn}>← Back</button>
+                    <Link to="/#categories" className={styles.backBtn}>← Back</Link>
                     <h1 className="serif">{category.name}</h1>
                     <p className="sans">{category.description}</p>
                 </motion.div>
@@ -33,10 +32,11 @@ const CategoryPage = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.1 }}
                             className={styles.brandCard}
-                            onClick={() => navigate(`/category/${categoryId}/${brand}`)}
                         >
-                            <h3 className="serif">{brandMapping[brand] || brand}</h3>
-                            <span className="sans">View Projects →</span>
+                            <Link to={`/category/${categoryId}/${brand}`} className={styles.brandCardLink}>
+                                <h3 className="serif">{brandMapping[brand] || brand}</h3>
+                                <span className="sans">View Projects →</span>
+                            </Link>
                         </motion.div>
                     ))}
                 </div>

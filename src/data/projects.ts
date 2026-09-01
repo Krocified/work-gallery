@@ -1,5 +1,18 @@
 import imagesData from '../assets/images.json';
 
+type AspectRatio = 'square' | 'portrait' | 'landscape';
+
+interface ImageItem {
+    file?: string;
+    files?: string[];
+    title: string;
+    aspectRatio?: AspectRatio;
+}
+
+type ImagesData = Record<string, ImageItem[] | string[]>;
+
+const typedImagesData = imagesData as unknown as ImagesData;
+
 export interface Project {
     id: string;
     title: string;
@@ -8,7 +21,7 @@ export interface Project {
     type: 'image' | 'video' | 'carousel';
     url: string; // Used for thumbnails and single files
     urls?: string[]; // Used for carousels
-    aspectRatio: 'square' | 'portrait' | 'landscape';
+    aspectRatio: AspectRatio;
 }
 
 export interface Category {
@@ -25,10 +38,10 @@ const processedProjects: Project[] = [];
 const brandsWithImages = new Set<string>();
 const brandsWithVideos = new Set<string>();
 
-Object.entries(imagesData).forEach(([brandKey, items]) => {
+Object.entries(typedImagesData).forEach(([brandKey, items]) => {
     if (brandKey === 'featured') return;
 
-    (items as any[]).forEach((item, index) => {
+    (items as ImageItem[]).forEach((item, index) => {
         const { file: filename, files, title } = item;
         const isCarousel = Array.isArray(files);
         const isVideo = !isCarousel && filename?.toLowerCase().endsWith('.mp4');
@@ -65,7 +78,9 @@ Object.entries(imagesData).forEach(([brandKey, items]) => {
     });
 });
 
-const featuredFilenames = (imagesData as any).featured || [];
+const featuredFilenames = Array.isArray(typedImagesData.featured)
+    ? typedImagesData.featured.filter((filename): filename is string => typeof filename === 'string')
+    : [];
 
 export const featuredWorks: Project[] = featuredFilenames.map((featuredFile: string) => {
     return processedProjects.find(p => {

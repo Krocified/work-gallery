@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { useEffect } from 'react';
 import Nav from './components/Nav/Nav';
@@ -32,6 +32,8 @@ const AnimatedRoutes = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/category/:categoryId" element={<CategoryPage />} />
         <Route path="/category/:categoryId/:brandId" element={<BrandPage />} />
+        <Route path="/not-found" element={<div className="not-found"><h1 className="serif">Page not found</h1><a href="/" className="sans">Return home</a></div>} />
+        <Route path="*" element={<Navigate to="/not-found" replace />} />
       </Routes>
     </AnimatePresence>
   );
@@ -46,10 +48,10 @@ function App() {
         <main>
           <AnimatedRoutes />
         </main>
-        <footer style={{ padding: '4rem 2rem', textAlign: 'center', opacity: 0.5, fontSize: '0.8rem' }} className="sans">
-          <p>© {new Date().getFullYear()} Archive. All rights reserved.</p>
-          <p style={{ marginTop: '0.5rem' }}>
-            Collaboration with <a href="https://github.com/Krocified" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', opacity: 1 }}>Michael Jong</a>
+        <footer className="footer sans">
+            <p>© {new Date().getFullYear()} Archive. All rights reserved.</p>
+            <p>
+                Collaboration with <a href="https://github.com/Krocified" target="_blank" rel="noopener noreferrer">Michael Jong</a>
           </p>
         </footer>
       </div>

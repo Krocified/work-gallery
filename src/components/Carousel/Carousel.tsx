@@ -7,11 +7,12 @@ import styles from './Carousel.module.css';
 
 interface CarouselProps {
     urls: string[];
+    title: string;
     aspectRatio?: 'square' | 'portrait' | 'landscape';
     onItemClick?: (index: number) => void;
 }
 
-const CarouselItem = ({ url, aspectRatio }: { url: string; aspectRatio?: 'square' | 'portrait' | 'landscape' }) => {
+const CarouselItem = ({ url, title, aspectRatio }: { url: string; title: string; aspectRatio?: 'square' | 'portrait' | 'landscape' }) => {
     const { url: assetUrl, loading } = useAssetUrl(url);
     const isVideo = url.toLowerCase().endsWith('.mp4');
 
@@ -26,6 +27,7 @@ const CarouselItem = ({ url, aspectRatio }: { url: string; aspectRatio?: 'square
                         className={`${styles.carouselVideo} ${styles.galleryMedia}`}
                         muted
                         playsInline
+                        preload="metadata"
                     />
                     <div className={styles.playOverlay}>
                         <span>▶</span>
@@ -34,15 +36,17 @@ const CarouselItem = ({ url, aspectRatio }: { url: string; aspectRatio?: 'square
             ) : (
                 <img
                     src={assetUrl}
-                    alt=""
+                    alt={title}
                     className={`${styles.carouselImg} ${styles.galleryMedia}`}
+                    loading="lazy"
+                    decoding="async"
                 />
             )}
         </div>
     );
 };
 
-const Carousel = ({ urls, onItemClick }: CarouselProps) => {
+const Carousel = ({ urls, title, aspectRatio, onItemClick }: CarouselProps) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const handlePrev = useCallback((e: React.MouseEvent) => {
@@ -59,24 +63,30 @@ const Carousel = ({ urls, onItemClick }: CarouselProps) => {
         <div
             className={`${styles.carouselContainer} ${styles.carouselInline}`}
             onClick={() => onItemClick?.(currentIndex)}
+            onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') onItemClick?.(currentIndex);
+            }}
+            role="button"
+            tabIndex={0}
+            aria-label="Open carousel item"
         >
             <motion.div
                 className={styles.carouselTrack}
                 animate={{ x: `-${currentIndex * 100}%` }}
                 transition={{ type: 'spring', damping: 30, stiffness: 200 }}
             >
-                {urls.map((url) => (
-                    <CarouselItem key={url} url={url} />
+                {urls.map((url, index) => (
+                    <CarouselItem key={url} url={url} title={`${title}, item ${index + 1}`} aspectRatio={aspectRatio} />
                 ))}
             </motion.div>
 
             {urls.length > 1 && (
                 <>
-                    <button className={`${styles.navBtn} ${styles.prevBtn}`} onClick={handlePrev}>
-                        <ChevronLeft size={24} />
+                    <button aria-label="Previous carousel item" className={`${styles.navBtn} ${styles.prevBtn}`} onClick={handlePrev}>
+                        <ChevronLeft size={24} aria-hidden="true" />
                     </button>
-                    <button className={`${styles.navBtn} ${styles.nextBtn}`} onClick={handleNext}>
-                        <ChevronRight size={24} />
+                    <button aria-label="Next carousel item" className={`${styles.navBtn} ${styles.nextBtn}`} onClick={handleNext}>
+                        <ChevronRight size={24} aria-hidden="true" />
                     </button>
 
                     <div className={styles.indicators}>

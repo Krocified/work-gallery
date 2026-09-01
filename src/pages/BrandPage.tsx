@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { projectsByBrand } from '../data/projects';
+import { allCategories, projectsByBrand } from '../data/projects';
 import type { Project } from '../data/projects';
 import { brandMapping } from '../data/brandMapping';
 import { useAssetUrl } from '../hooks/useAssetUrl';
@@ -25,6 +25,7 @@ const GalleryItem = ({ project, index, onClick }: { project: Project, index: num
             ) : project.type === 'carousel' ? (
                 <Carousel
                     urls={project.urls || []}
+                    title={project.title}
                     aspectRatio={project.aspectRatio}
                     onItemClick={(mediaIndex) => onClick(mediaIndex)}
                 />
@@ -35,13 +36,14 @@ const GalleryItem = ({ project, index, onClick }: { project: Project, index: num
                         className={styles.galleryImg}
                         muted
                         playsInline
+                        preload="metadata"
                     />
                     <div className={styles.playOverlay}>
                         <span>▶</span>
                     </div>
                 </div>
             ) : (
-                <img src={assetUrl} alt={project.title} className={styles.galleryImg} onClick={() => onClick()} />
+            <img src={assetUrl} alt={project.title} className={styles.galleryImg} loading="lazy" decoding="async" onClick={() => onClick()} />
             )}
             {!loading && (
                 <div className={styles.galleryInfo}>
@@ -54,12 +56,16 @@ const GalleryItem = ({ project, index, onClick }: { project: Project, index: num
 
 const BrandPage = () => {
     const { categoryId, brandId } = useParams();
-    const navigate = useNavigate();
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
     const allBrandProjects = projectsByBrand[brandId || ''] || [];
     const projects = allBrandProjects.filter(p => !categoryId || p.category === categoryId);
+    const category = allCategories.find((item) => item.id === categoryId);
+
+    if (!category || !brandId || !category.brands.includes(brandId)) {
+        return <Navigate to="/not-found" replace />;
+    }
 
     const handleProjectClick = (project: Project, mediaIndex?: number) => {
         setSelectedProject(project);
@@ -74,9 +80,9 @@ const BrandPage = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className={styles.header}
                 >
-                    <button onClick={() => navigate('/#categories')} className={styles.backBtn}>← Back</button>
+                    <Link to="/#categories" className={styles.backBtn}>← Back</Link>
                     <h1 className="serif">{brandMapping[brandId || ''] || brandId}</h1>
-                    <p className="sans">Social Media Design</p>
+                    <p className="sans">{category.name}</p>
                 </motion.div>
 
                 {projects.length > 0 ? (
@@ -125,6 +131,7 @@ const MediaPreview = ({ project, index = 0 }: { project: Project; index?: number
             src={url}
             controls
             autoPlay
+            preload="metadata"
             className={styles.modalVideo}
         />
     ) : (

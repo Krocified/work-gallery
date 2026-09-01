@@ -12,10 +12,7 @@ export const useAssetUrl = (key: string | undefined) => {
     useEffect(() => {
         let isMounted = true;
 
-        if (!key) {
-            setLoading(false);
-            return;
-        }
+        if (!key) return;
 
         const fetchUrl = async () => {
             setLoading(true);
@@ -38,5 +35,5 @@ export const useAssetUrl = (key: string | undefined) => {
         };
     }, [key]);
 
-    return { url, loading };
+    return { url: key ? url : '', loading: key ? loading : false };
 };

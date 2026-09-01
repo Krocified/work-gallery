@@ -45,8 +45,14 @@ const Nav = () => {
                 </ul>
 
                 {/* Mobile Toggle */}
-                <button className={styles.mobileToggle} onClick={() => setIsOpen(!isOpen)}>
-                    {isOpen ? <X size={24} /> : <Menu size={24} />}
+                <button
+                    className={styles.mobileToggle}
+                    onClick={() => setIsOpen(!isOpen)}
+                    aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
+                    aria-expanded={isOpen}
+                    aria-controls="mobile-navigation"
+                >
+                    {isOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
                 </button>
             </div>
 
@@ -58,6 +64,7 @@ const Nav = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         className={styles.mobileMenu}
+                        id="mobile-navigation"
                     >
                         <ul>
                             {navLinks.map((link) => (
