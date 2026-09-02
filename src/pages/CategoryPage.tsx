@@ -35,7 +35,6 @@ const CategoryPage = () => {
                         <motion.div
                             key={brand}
                             variants={{ visible: { opacity: 1, y: 0 }, hidden: { opacity: 0, y: 10 } }}
-                            whileHover={{ scale: 1.02 }}
                             className={styles.brandCard}
                         >
                             <Link to={`/category/${categoryId}/${brand}`} className={styles.brandCardLink}>

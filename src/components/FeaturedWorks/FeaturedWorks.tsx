@@ -25,8 +25,6 @@ const FeaturedItem = ({ project, onClick }: { project: Project, onClick: () => v
         <motion.button
             type="button"
             variants={itemVariants}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
             className={styles.item}
             onClick={onClick}
             aria-label={`View ${project.title}`}

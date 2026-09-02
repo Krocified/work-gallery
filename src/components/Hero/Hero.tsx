@@ -1,8 +1,33 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import mofuHeader from '../../assets/mofu_header.png';
 import styles from './Hero.module.css';
 
+const getWaveCount = () => {
+    if (typeof window === 'undefined') return 12;
+    return Math.min(20, Math.max(6, Math.round(window.innerWidth / 72)));
+};
+
+const createWavePath = (count: number) => {
+    const waveWidth = 1440 / count;
+    const quarter = waveWidth / 4;
+    const segments = Array.from({ length: count }, (_, index) => {
+        const start = index * waveWidth;
+        return `Q${start + quarter},94 ${start + waveWidth / 2},64 Q${start + waveWidth - quarter},34 ${start + waveWidth},64`;
+    }).join(' ');
+
+    return `M0,64 ${segments} L1440,120 L0,120 Z`;
+};
+
 const Hero: React.FC = () => {
+    const [waveCount, setWaveCount] = useState(getWaveCount);
+
+    useEffect(() => {
+        const handleResize = () => setWaveCount(getWaveCount());
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     return (
         <section className={styles.hero}>
             <div className={styles.container}>
@@ -34,7 +59,7 @@ const Hero: React.FC = () => {
                 </motion.div>
             </div>
             <svg className={styles.wave} viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-                <path d="M0,64 C240,100 480,28 720,64 C960,100 1200,28 1440,64 L1440,120 L0,120 Z" />
+                <path d={createWavePath(waveCount)} />
             </svg>
         </section>
     );

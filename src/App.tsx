@@ -51,8 +51,12 @@ function App() {
           </main>
           <footer className="footer sans">
               <p>© {new Date().getFullYear()} Archive. All rights reserved.</p>
-              <p>
-                  Collaboration with <a href="https://github.com/Krocified" target="_blank" rel="noopener noreferrer">Michael Jong</a>
+            <p>
+                Collaboration with <a href="https://github.com/Krocified" target="_blank" rel="noopener noreferrer">Michael Jong</a>
+            </p>
+            <p>
+                Mofusand artwork belongs to its respective owner. No ownership is claimed.{' '}
+                <a href="https://mofusand.com/" target="_blank" rel="noopener noreferrer">Visit Mofusand</a>
             </p>
           </footer>
         </div>

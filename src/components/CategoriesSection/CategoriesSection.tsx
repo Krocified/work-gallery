@@ -1,6 +1,5 @@
-import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { allCategories } from '../../data/projects';
 import type { Category } from '../../data/projects';
 import { useAssetUrl } from '../../hooks/useAssetUrl';
@@ -8,23 +7,11 @@ import styles from './CategoriesSection.module.css';
 
 const CategoryCard = ({ cat }: { cat: Category }) => {
     const { url: assetUrl } = useAssetUrl(cat.coverImage);
-    const cardRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: cardRef,
-        offset: ['start end', 'center center'],
-    });
-    const clipPath = useTransform(
-        scrollYProgress,
-        [0, 1],
-        ['inset(0% 50% 0% 50%)', 'inset(0% 0% 0% 0%)'],
-    );
 
     return (
         <motion.div
-            ref={cardRef}
-            whileHover={{ scale: 1.01 }}
             className={styles.card}
-            style={{ backgroundImage: `url("${assetUrl}")`, clipPath }}
+            style={{ backgroundImage: `url("${assetUrl}")` }}
         >
             <Link to={`/category/${cat.id}`} className={styles.cardLink}>
                 <div className={styles.overlay}></div>
