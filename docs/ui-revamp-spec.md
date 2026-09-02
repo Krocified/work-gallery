@@ -53,7 +53,7 @@ All changes are restyling only; classNames and DOM stay the same.
 - **Nav**: scrolled glass `rgba(245,245,220,.8)` → `rgba(255,248,242,.75)`; logo hover color `--accent-deep`.
 - **Hero**: solid `--blue-brand` (`#70A2B6`, taken from mofusand.com) background; title and subtitle in white, mimicking the mofusand logo treatment. No gradients.
 - **CategoriesSection**: cards get `--radius-round`, `--shadow-soft` → `--shadow-lift` on hover; no scroll reveal or scale transform, preserving the grid gaps.
-- **CategoryPage brand cards**: fill `--bg-accent` → rotate through `--bg-pink` / `--bg-blue` / `--bg-mint` by index (nth-child, no JS).
+- **CategoryPage project grid**: show all brand projects directly in compact, consistent 3:4 portrait tiles; group tiles under each brand heading.
 - **FeaturedWorks**: item radius → `--radius-soft`; overlay gradient darkened slightly (text-primary at 70%) to keep AA on pastel images.
 - **Carousel**: dots idle `rgba(255,255,255,.5)` → `rgba(68,58,52,.25)`; active dot `--accent-deep`; nav buttons keep dark glass (fine on pastel).
 - **Modal**: image-first presentation with a lighter translucent overlay, compact floating header, transparent media background, and no side borders.
@@ -90,7 +90,7 @@ Remove the `translateY(-5px/-8px)` CSS hovers on category/featured cards — ges
 
 ### 6.3 Stagger via variants (replaces manual `delay: index * 0.1`)
 
-Variants propagate down the tree; `delayChildren` + `stagger` orchestrate cleanly. Apply to brand-card grid and featured masonry:
+Variants propagate down the tree; `delayChildren` + `stagger` orchestrate cleanly. Apply to category brand sections and featured masonry:
 
 ```tsx
 const list = {
@@ -149,7 +149,7 @@ Dropped — the hero is now a solid brand-blue panel per §5, so there is no was
 
 1. Tokens + base styles (`index.css`) — everything else inherits.
 2. Shared surfaces: cards, skeleton, modal, focus/selection.
-3. Section accents: Nav, solid Hero, alternating brand-card fills, Contact.
+3. Section accents: Nav, solid Hero, category project sections, Contact.
 4. Motion pass.
 
 Each phase is independently shippable and verifiable with `npm run lint && npm run build`.

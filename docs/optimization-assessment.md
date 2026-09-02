@@ -39,12 +39,12 @@ The metadata and hook issues were fixed. `npm run lint` now passes.
 
 ## Priority 2: Accessibility And Correctness
 
-- Clickable cards now use links/buttons in the category, brand, and featured-work flows.
+- Clickable cards now use links/buttons in the category and featured-work flows.
 - Navigation, modal, and carousel controls now have accessible names and state.
 - The modal now provides dialog semantics, Escape handling, focus restoration, and focus containment.
 - Carousel image alternatives, visible focus styles, and reduced-motion behavior are implemented.
 - A not-found route now handles unknown paths, categories, and brands.
-- BrandPage now derives its description from the selected category.
+- Category pages now expose project thumbnails directly, so a separate BrandPage is no longer needed.
 
 ## Priority 3: Asset Loading
 

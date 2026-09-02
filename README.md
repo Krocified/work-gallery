@@ -72,7 +72,7 @@ The application will be available at `http://localhost:5173`.
 
 - `src/components`: Reusable UI components (Nav, Gallery, Layouts).
 - `src/data`: Project definitions and brand mappings.
-- `src/pages`: Main application views (Home, Category, Brand).
+- `src/pages`: Main application views (Home and Category).
 - `src/utils`: Helper functions for S3 asset fetching and URL generation.
 - `src/assets`: Local static assets and image metadata.
 
