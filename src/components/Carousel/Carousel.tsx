@@ -8,6 +8,7 @@ import styles from './Carousel.module.css';
 interface CarouselProps {
     urls: string[];
     title: string;
+    className?: string;
     aspectRatio?: 'square' | 'portrait' | 'landscape';
     onItemClick?: (index: number) => void;
 }
@@ -46,7 +47,7 @@ const CarouselItem = ({ url, title, aspectRatio }: { url: string; title: string;
     );
 };
 
-const Carousel = ({ urls, title, aspectRatio, onItemClick }: CarouselProps) => {
+const Carousel = ({ urls, title, className, aspectRatio, onItemClick }: CarouselProps) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const handlePrev = useCallback((e: React.MouseEvent) => {
@@ -61,7 +62,8 @@ const Carousel = ({ urls, title, aspectRatio, onItemClick }: CarouselProps) => {
 
     return (
         <div
-            className={`${styles.carouselContainer} ${styles.carouselInline}`}
+            className={`${styles.carouselContainer} ${styles.carouselInline} ${className || ''}`}
+            data-aspect={aspectRatio || 'square'}
             onClick={() => onItemClick?.(currentIndex)}
             onKeyDown={(event) => {
                 if (event.key === 'Enter' || event.key === ' ') onItemClick?.(currentIndex);
@@ -74,6 +76,17 @@ const Carousel = ({ urls, title, aspectRatio, onItemClick }: CarouselProps) => {
                 className={styles.carouselTrack}
                 animate={{ x: `-${currentIndex * 100}%` }}
                 transition={{ type: 'spring', damping: 30, stiffness: 150 }}
+                drag="x"
+                dragDirectionLock
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={(_, info) => {
+                    if (info.offset.x < -50) {
+                        setCurrentIndex((prev) => (prev === urls.length - 1 ? 0 : prev + 1));
+                    } else if (info.offset.x > 50) {
+                        setCurrentIndex((prev) => (prev === 0 ? urls.length - 1 : prev - 1));
+                    }
+                }}
             >
                 {urls.map((url, index) => (
                     <CarouselItem key={url} url={url} title={`${title}, item ${index + 1}`} aspectRatio={aspectRatio} />

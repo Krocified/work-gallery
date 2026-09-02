@@ -3,6 +3,7 @@
     overflow: hidden;
     border-radius: var(--radius-soft);
     background-color: var(--bg-accent);
+    touch-action: pan-y;
 }
 
 .carouselInline {
@@ -12,6 +13,11 @@
 .carouselTrack {
     display: flex;
     height: 100%;
+    cursor: grab;
+}
+
+.carouselTrack:active {
+    cursor: grabbing;
 }
 
 .carouselItem {

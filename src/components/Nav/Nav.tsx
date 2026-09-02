@@ -65,11 +65,13 @@ const Nav = () => {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
+                        initial={{ scaleY: 0 }}
+                        animate={{ scaleY: 1 }}
+                        exit={{ scaleY: 0 }}
+                        transition={{ type: 'tween', duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
                         className={styles.mobileMenu}
                         id="mobile-navigation"
+                        style={{ transformOrigin: 'top' }}
                     >
                         <ul>
                             {navLinks.map((link) => (

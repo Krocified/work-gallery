@@ -21,6 +21,7 @@ const createWavePath = (count: number) => {
 
 const Hero: React.FC = () => {
     const [waveCount, setWaveCount] = useState(getWaveCount);
+    const [catHasSettled, setCatHasSettled] = useState(false);
 
     useEffect(() => {
         const handleResize = () => setWaveCount(getWaveCount());
@@ -28,16 +29,19 @@ const Hero: React.FC = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    useEffect(() => {
+        const handleScroll = () => setCatHasSettled(window.scrollY > 80);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     return (
         <section className={styles.hero}>
             <div className={styles.container}>
-                <motion.img
+                <img
                     src={mofuHeader}
                     alt="mofusand artwork"
-                    className={styles.mofu}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    className={`${styles.mofu} ${catHasSettled ? styles.settled : ''}`}
                 />
                 <motion.div
                     initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}

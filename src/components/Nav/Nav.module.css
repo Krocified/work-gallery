@@ -66,11 +66,47 @@
     font-size: 1.15rem;
     letter-spacing: 0.03em;
     font-weight: 400;
+    position: relative;
+    display: inline-block;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.desktopLinks a::after,
+.mobileMenu a::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -0.25rem;
+    left: 0;
+    height: 2px;
+    background: var(--accent-deep);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.25s ease;
+}
+
+.desktopLinks a:hover,
+.mobileMenu a:hover {
+    color: var(--accent-deep);
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+.desktopLinks a:hover::after,
+.mobileMenu a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
 .mobileToggle {
     display: none;
     color: var(--text-primary);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.mobileToggle:hover {
+    color: var(--accent-deep);
+    transform: scale(1.08);
 }
 
 .mobileMenu {
@@ -81,6 +117,8 @@
     background: var(--bg-color);
     padding: 2rem;
     border-bottom: 1px solid var(--bg-accent);
+    overflow: hidden;
+    will-change: transform;
 }
 
 .mobileMenu ul {
@@ -96,9 +134,28 @@
 .mobileMenu a {
     font-family: var(--font-serif);
     font-size: 2rem;
+    position: relative;
+    display: inline-block;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.overHero .desktopLinks a::after {
+    background: #ffffff;
+}
+
+.overHero .desktopLinks a:hover {
+    color: #ffffff;
+}
+
+.overHero .mobileToggle:hover {
+    color: #ffffff;
 }
 
 @media (max-width: 768px) {
+    .nav {
+        z-index: 1200;
+    }
+
     .desktopLinks {
         display: none;
     }

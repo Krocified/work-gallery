@@ -78,8 +78,8 @@ body::after {
   /* Dusty rose (fill only, not text) */
   --accent-deep: #C97B84;
   /* Deep rose (text/interactive) */
-  --radius-soft: 12px;
-  --radius-round: 24px;
+  --radius-soft: 4px;
+  --radius-round: 8px;
   --shadow-soft: 0 8px 24px rgba(68, 58, 52, 0.08);
   --shadow-lift: 0 16px 40px rgba(68, 58, 52, 0.14);
 

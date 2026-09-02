@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Masonry from 'react-masonry-css';
 import { motion } from 'framer-motion';
 import { featuredWorks } from '../../data/projects';
@@ -18,14 +18,38 @@ const listVariants = {
     hidden: {},
 };
 
-const FeaturedItem = ({ project, onClick }: { project: Project, onClick: () => void }) => {
+const balanceProjects = (projects: Project[], columnCount: number) => {
+    const columns = Array.from({ length: columnCount }, () => ({ projects: [] as Project[], height: 0 }));
+
+    projects.forEach((project) => {
+        const weight = project.aspectRatio === 'portrait' ? 1.33 : project.aspectRatio === 'landscape' ? 0.56 : 1;
+        const shortestColumn = columns.reduce((shortest, column, index) => (
+            column.height < shortest.column.height ? { column, index } : shortest
+        ), { column: columns[0], index: 0 });
+
+        shortestColumn.column.projects.push(project);
+        shortestColumn.column.height += weight;
+    });
+
+    return Array.from({ length: Math.max(...columns.map((column) => column.projects.length)) }, (_, row) =>
+        columns.flatMap((column) => column.projects[row] || []),
+    ).flat();
+};
+
+const getColumnCount = () => {
+    if (typeof window === 'undefined' || window.innerWidth > 1100) return 4;
+    if (window.innerWidth > 700) return 3;
+    return 2;
+};
+
+const FeaturedItem = ({ project, index, onClick }: { project: Project, index: number, onClick: () => void }) => {
     const { url: assetUrl, loading } = useAssetUrl(project.url);
 
     return (
         <motion.button
             type="button"
             variants={itemVariants}
-            className={styles.item}
+            className={`${styles.item} ${index >= 8 ? styles.mobileHidden : ''}`}
             onClick={onClick}
             aria-label={`View ${project.title}`}
         >
@@ -55,11 +79,20 @@ const FeaturedItem = ({ project, onClick }: { project: Project, onClick: () => v
 
 const FeaturedWorks = () => {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+    const [columnCount, setColumnCount] = useState(getColumnCount);
+
+    useEffect(() => {
+        const handleResize = () => setColumnCount(getColumnCount());
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const balancedProjects = balanceProjects(featuredWorks, columnCount);
 
     const breakpointColumnsObj = {
-        default: 2,
-        1100: 2,
-        700: 1
+        default: 4,
+        1100: 3,
+        700: 2
     };
 
     return (
@@ -86,10 +119,11 @@ const FeaturedWorks = () => {
                         className="my-masonry-grid"
                         columnClassName="my-masonry-grid_column"
                     >
-                        {featuredWorks.map((project) => (
+                        {balancedProjects.map((project, index) => (
                             <FeaturedItem
                                 key={project.id}
                                 project={project}
+                                index={index}
                                 onClick={() => setSelectedProject(project)}
                             />
                         ))}

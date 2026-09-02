@@ -82,7 +82,7 @@ const featuredFilenames = Array.isArray(typedImagesData.featured)
     ? typedImagesData.featured.filter((filename): filename is string => typeof filename === 'string')
     : [];
 
-export const featuredWorks: Project[] = featuredFilenames.map((featuredFile: string) => {
+const configuredFeaturedWorks = featuredFilenames.map((featuredFile: string) => {
     return processedProjects.find(p => {
         // Check if the original filename is in the URL or URLs
         const s3Prefix = `s3://${BUCKET_NAME}/${p.brand}/`;
@@ -91,7 +91,15 @@ export const featuredWorks: Project[] = featuredFilenames.map((featuredFile: str
         }
         return p.url === `${s3Prefix}${featuredFile}`;
     });
-}).filter(Boolean) as Project[];
+}).filter((project): project is Project => project !== undefined && project.type !== 'video');
+
+const featuredIds = new Set(configuredFeaturedWorks.map((project) => project.id));
+const additionalFeaturedWorks = processedProjects
+    .filter((project) => project.type !== 'video' && !featuredIds.has(project.id))
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 12 - configuredFeaturedWorks.length);
+
+export const featuredWorks: Project[] = [...configuredFeaturedWorks, ...additionalFeaturedWorks].slice(0, 12);
 
 export const allCategories: Category[] = [
     {

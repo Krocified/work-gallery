@@ -14,19 +14,21 @@ const Modal = ({ isOpen, onClose, children, title }: ModalProps) => {
     const closeButtonRef = useRef<HTMLButtonElement>(null);
     const modalRef = useRef<HTMLDivElement>(null);
     const previousFocusRef = useRef<HTMLElement | null>(null);
+    const previousScrollRef = useRef(0);
 
     // Prevent scrolling when modal is open
     useEffect(() => {
-        if (isOpen) {
-            previousFocusRef.current = document.activeElement as HTMLElement;
-            document.body.style.overflow = 'hidden';
-            closeButtonRef.current?.focus();
-        } else {
-            document.body.style.overflow = 'unset';
-        }
+        if (!isOpen) return;
+
+        previousFocusRef.current = document.activeElement as HTMLElement;
+        previousScrollRef.current = window.scrollY;
+        document.body.style.overflow = 'hidden';
+        closeButtonRef.current?.focus({ preventScroll: true });
+
         return () => {
             document.body.style.overflow = 'unset';
-            previousFocusRef.current?.focus();
+            window.scrollTo(0, previousScrollRef.current);
+            previousFocusRef.current?.focus({ preventScroll: true });
         };
     }, [isOpen]);
 
