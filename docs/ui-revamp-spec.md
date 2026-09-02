@@ -43,7 +43,7 @@ Keep a two-font library, consistent across all text:
 - **Serif/display: Antic Didone** (Google Fonts, single weight) — replaces Playfair Display everywhere.
 - **Sans: Inter** (300–600).
 
-Hero composition: `mofu_header.png` cutout on the left (max ~80vh desktop, ~42vh mobile, stacked above centered text), solid `--blue-brand` background, white Antic Didone title. Navbar switches to white text while over the hero, dark text on the cream glass when scrolled or on inner pages.
+Hero composition: `mofu_header.png` cutout is fixed to the far left with a `10px` left overflow so it remains visible while the home page scrolls. It uses up to `760px` height on desktop and roughly `30vw` on mobile, where it stays top-left above centered text. The hero has a solid `--blue-brand` background and white Antic Didone title. Navbar switches to white text while over the hero, dark text on the cream glass when scrolled or on inner pages. The bottom curtain hem generates 6 scallops on mobile and up to 20 on wider screens.
 
 ## 5. Component Changes
 
@@ -52,11 +52,11 @@ All changes are restyling only; classNames and DOM stay the same.
 - **Grain overlay** (`index.css`): keep, drop opacity 0.03 → 0.02 so pastels read clean.
 - **Nav**: scrolled glass `rgba(245,245,220,.8)` → `rgba(255,248,242,.75)`; logo hover color `--accent-deep`.
 - **Hero**: solid `--blue-brand` (`#70A2B6`, taken from mofusand.com) background; title and subtitle in white, mimicking the mofusand logo treatment. No gradients.
-- **CategoriesSection**: cards get `--radius-round`, `--shadow-soft` → `--shadow-lift` on hover; replace the translateY hover with shadow+slight scale (1.01); brand-card hover fill switches beige→`--bg-pink`.
+- **CategoriesSection**: cards get `--radius-round`, `--shadow-soft` → `--shadow-lift` on hover; no scroll reveal or scale transform, preserving the grid gaps.
 - **CategoryPage brand cards**: fill `--bg-accent` → rotate through `--bg-pink` / `--bg-blue` / `--bg-mint` by index (nth-child, no JS).
 - **FeaturedWorks**: item radius → `--radius-soft`; overlay gradient darkened slightly (text-primary at 70%) to keep AA on pastel images.
 - **Carousel**: dots idle `rgba(255,255,255,.5)` → `rgba(68,58,52,.25)`; active dot `--accent-deep`; nav buttons keep dark glass (fine on pastel).
-- **Modal**: background `#0a0a0a` → `#3B332E` warm charcoal (keeps media contrast, matches palette temperature); radius → `--radius-round`.
+- **Modal**: image-first presentation with a lighter translucent overlay, compact floating header, transparent media background, and no side borders.
 - **Skeleton**: fill `--bg-mint`, shimmer highlight `rgba(255,255,255,.6)`.
 - **Contact**: contact-link cards → `--bg-blue` fill, `--radius-soft`, `--shadow-soft`; hover shadow-lift.
 - **Buttons/links**: `:focus-visible` outline color `--accent-deep`, width 2px (keep existing offset).
@@ -117,7 +117,7 @@ Motion animates `filter`; a blur-in matches the fluffy theme for hero and page h
 
 ### 6.5 Scroll progress bar (Nav)
 
-`useScroll` + `useSpring` linked to `scaleX` — a dusty-rose progress hairline under the nav:
+`useScroll` + `useSpring` linked to `scaleX` — a brand-blue progress hairline under the nav:
 
 ```tsx
 import { useScroll, useSpring, motion } from 'framer-motion';
@@ -128,17 +128,9 @@ const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDel
 <motion.div style={{ scaleX, originX: 0 }} />
 ```
 
-### 6.6 Scroll image reveal (category cards)
+### 6.6 Category card scroll effects
 
-Link `clipPath` to scroll progress so cards reveal like a sandwich unwrapping:
-
-```tsx
-const ref = useRef(null);
-const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'center center'] });
-const clipPath = useTransform(scrollYProgress, [0, 1], ['inset(0% 50% 0% 50%)', 'inset(0% 0% 0% 0%)']);
-
-<motion.div ref={ref} style={{ clipPath }} />
-```
+Dropped. Category cards remain stable while scrolling so their borders, margins, and grid gaps stay visually intact.
 
 ### 6.7 Hero parallax wash
 
@@ -151,13 +143,13 @@ Dropped — the hero is now a solid brand-blue panel per §5, so there is no was
 - Animated CSS variables — paint-heavy; no current need.
 - Custom cursor — gimmicky for a portfolio, conflicts with pastel softness.
 
-`prefers-reduced-motion` handling already in place; Motion's `useReducedMotion` can gate 6.5–6.7 individually if needed.
+`prefers-reduced-motion` handling already in place; Motion's `useReducedMotion` can gate the progress bar and page reveals individually if needed.
 
 ## 7. Implementation Phases
 
 1. Tokens + base styles (`index.css`) — everything else inherits.
 2. Shared surfaces: cards, skeleton, modal, focus/selection.
-3. Section accents: Nav, Hero wash, alternating brand-card fills, Contact.
+3. Section accents: Nav, solid Hero, alternating brand-card fills, Contact.
 4. Motion pass.
 
 Each phase is independently shippable and verifiable with `npm run lint && npm run build`.
