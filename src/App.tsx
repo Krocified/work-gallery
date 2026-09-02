@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import Nav from './components/Nav/Nav';
 import HomePage from './pages/HomePage';
 import CategoryPage from './pages/CategoryPage';
-import BrandPage from './pages/BrandPage';
 
 // Smart Scroll utility: handles top-scrolling and hash-links
 const ScrollToTop = () => {
@@ -31,7 +30,6 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<HomePage />} />
         <Route path="/category/:categoryId" element={<CategoryPage />} />
-        <Route path="/category/:categoryId/:brandId" element={<BrandPage />} />
         <Route path="/not-found" element={<div className="not-found"><h1 className="serif">Page not found</h1><a href="/" className="sans">Return home</a></div>} />
         <Route path="*" element={<Navigate to="/not-found" replace />} />
       </Routes>

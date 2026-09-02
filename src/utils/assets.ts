@@ -15,9 +15,12 @@ const parseS3Uri = (uri: string) => {
 
 export const getAssetUrl = async (uri: string): Promise<string> => {
     if (!uri) return '';
-    if (uri.startsWith('http')) return uri;
     const cachedUrl = assetUrlCache.get(uri);
     if (cachedUrl) return cachedUrl;
+    if (uri.startsWith('http')) {
+        assetUrlCache.set(uri, uri);
+        return uri;
+    }
 
     const { bucket, key } = parseS3Uri(uri);
     const encodedKey = key.split('/').map(encodeURIComponent).join('/');
